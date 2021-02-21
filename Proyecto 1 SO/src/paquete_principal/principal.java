@@ -5,18 +5,70 @@
  */
 package paquete_principal;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.util.Scanner;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Lopez
  */
 public class principal extends javax.swing.JFrame {
+      DefaultTableModel modelo;
+    String []datos=new String [31];
 
     /**
      * Creates new form principal
      */
     public principal() {
         initComponents();
+        mostrardatos();
     }
+        public void mostrardatos(){
+      /* tablita.getTableHeader().setFont(new Font("Arial", 1, 13));
+        // cambia el fondo del encabezado de la tabla
+        tablita.getTableHeader().setBackground(Color.WHITE);
+        // cambia el color de la letra del encabezado de la tabla
+        tablita.getTableHeader().setForeground(Color.BLACK);
+        modelo= new DefaultTableModel();
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        modelo.addColumn("No.");
+        modelo.addColumn("[ ]");
+        modelo.addColumn("Lista");
+        tablita.setModel(modelo);*/
+        
+        String anuncio="dato",lista="si";
+        HiloTamanio tamanio=new HiloTamanio();
+        int bloque = (int) (Math.random() * 16) + 1;// La cantidad de bloques que se desea ocupar
+            System.out.println("El bloque"+bloque);
+        //tamanio.settamanioBloques(bloque);
+        tamanio.setBloqueAnterior(5);
+        tamanio.setBloque(bloque);
+        tamanio.setTabla(tablita);
+        tamanio.activo=true;
+        tamanio.start();
+        
+       /* for (int i = 0; i <16; i++) {            
+            datos[0]=String.valueOf(i);
+            datos[1]=anuncio;
+            datos[2]=lista;
+            modelo.addRow(datos);        
+        }*/
+        //this.tablita.setModel(modelo);
+       /* tablita.getColumnModel().getColumn(0).setCellRenderer(tcr);
+        ColorFila color= new ColorFila(1);
+        tablita.getColumnModel().getColumn(1).setCellRenderer(color);
+        ColorFila color2=new ColorFila(2);
+        tablita.getColumnModel().getColumn(2).setCellRenderer(color2);
+  
+        tcr.setHorizontalAlignment(SwingConstants.CENTER);*/
+        
+       
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -27,17 +79,61 @@ public class principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablita = new javax.swing.JTable();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        tablita = new javax.swing.JTable(){
+            public boolean isCellEditable(int ro,int col ){
+                return false;
+            }
+        };
+        tablita.setBorder(javax.swing.BorderFactory.createCompoundBorder());
+        tablita.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Tamaño", "No.", "Documento", "Estado"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                true, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tablita.setFocusable(false);
+        tablita.setGridColor(new java.awt.Color(255, 255, 255));
+        tablita.getTableHeader().setResizingAllowed(false);
+        tablita.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(tablita);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(328, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(43, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(265, 265, 265))
         );
 
         pack();
@@ -79,5 +175,7 @@ public class principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tablita;
     // End of variables declaration//GEN-END:variables
 }
