@@ -27,11 +27,42 @@ public class HiloTamanio extends Thread {
     DefaultTableModel modelo;
     String[] datos = new String[4];
     Color[] Colores = new Color[]{Color.red, Color.green, Color.blue};
-
+    boolean Llena=false;
     int creado = 0;
     int tamañobloque = 0;
     int bloqueAnterior = 0, bloqueActual;
     int linea = 0, columna = 0;
+    int espaciolibre=16;
+
+    public int getEspaciolibre() {
+        return espaciolibre;
+    }
+
+    public void setEspaciolibre(int espaciolibre) { 
+        this.espaciolibre = espaciolibre;
+    }
+    
+    public boolean isLlena() {
+        return Llena;
+    }
+
+    public void setLlena(boolean Llena) {
+        this.Llena = Llena;
+    }
+
+
+    public boolean Memoria_llena() {
+        int lleno=tabla.getRowCount();
+        System.out.println("Filas "+lleno);
+        if (lleno >= 16) {
+            JOptionPane.showMessageDialog(null, "Memoria llena");
+            return true;
+            //cuando aparezca este mensaje ya no se pueden meter más documentos
+        } else {
+            espaciolibre= 16-lleno;
+            return false;
+        }
+    }
 
     public int getBloqueAnterior() {
         return bloqueAnterior;
@@ -60,7 +91,7 @@ public class HiloTamanio extends Thread {
             JOptionPane.showMessageDialog(null, "Supera nuestra capacidad para almacenar");
         } else {
             this.tamañobloque = (int) Math.pow(2, cantbloque) - 1;
-            System.out.println("Capacidad"+tamañobloque);
+            System.out.println("Capacidad" + tamañobloque);
         }
     }
 
@@ -115,7 +146,7 @@ public class HiloTamanio extends Thread {
             int ultimotamaño = tamañobloque;//el tamaño que quieren guardar
             tiempo = tiem.nextInt(100);
             c = 1;
-            if (creado == 0 || creado == bloque-1) {
+            if (creado == 0 || creado == bloque - 1) {
                 if (c == 1) {
                     System.out.println("uno");
                     String tamaño;
@@ -133,7 +164,7 @@ public class HiloTamanio extends Thread {
                         c = 2;
                     } else {
                         if (bloqueAnterior > 0) {
-                            settamanioBloques(bloque+ bloqueAnterior);
+                            settamanioBloques(bloque + bloqueAnterior);
                             tamaño = Hexadecimales(tamañobloque);
                         } else {
                             settamanioBloques(bloque);
@@ -170,6 +201,7 @@ public class HiloTamanio extends Thread {
                     creado++;
                     sleep(1000);
                     if (bloque == creado) {
+                        Llena=Memoria_llena();
                         activo = false;
                     }
                 } catch (InterruptedException ex) {

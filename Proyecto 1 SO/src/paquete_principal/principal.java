@@ -45,12 +45,15 @@ public class principal extends javax.swing.JFrame {
         int bloque = (int) (Math.random() * 16) + 1;// La cantidad de bloques que se desea ocupar
             System.out.println("El bloque"+bloque);
         //tamanio.settamanioBloques(bloque);
-        tamanio.setBloqueAnterior(5);
-        tamanio.setBloque(bloque);
+        int espaciolibre=tamanio.getEspaciolibre();// dice cuanto espacio libre tiene la memoria
+            System.out.println("la memoria tiene"+ espaciolibre+ "bloques libres");
+        tamanio.setBloqueAnterior(0);// Se envia el numero (1-16) de bloques ya ocupados
+        tamanio.setBloque(16);// se manda el tamaño de bloques que ocupa el nuevo documento
         tamanio.setTabla(tablita);
         tamanio.activo=true;
         tamanio.start();
-        
+        boolean ver=tamanio.isLlena();// retorna un booleano , si es true la memoria ya esta llena si es false aún hay espacio
+        System.out.println("La memoria "+ ver + " llena");
        /* for (int i = 0; i <16; i++) {            
             datos[0]=String.valueOf(i);
             datos[1]=anuncio;
