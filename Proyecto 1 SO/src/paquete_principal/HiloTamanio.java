@@ -142,13 +142,15 @@ public class HiloTamanio extends Thread {
             //modelo = new DefaultTableModel();
             //tabla.setModel(modelo);
             System.out.println("BLOQUE" + bloque);
+            System.out.println("creado " + creado);
+            System.out.println("bloque anterior  "+bloqueAnterior);
             int col = (int) (Math.random() * 2) + 1;
             int ultimotamaño = tamañobloque;//el tamaño que quieren guardar
             tiempo = tiem.nextInt(100);
             c = 1;
             if (creado == 0 || creado == bloque - 1) {
                 if (c == 1) {
-                    System.out.println("uno");
+                    //System.out.println("uno");
                     String tamaño;
                     if (creado == 0) {
                         if (bloqueAnterior/*Ve  las filas totales ocupadas*/ > 0) {
@@ -180,13 +182,13 @@ public class HiloTamanio extends Thread {
                 c = 2;
             }
             if (c == 2) {
-                System.out.println("uno");
+               // System.out.println("uno");
                 datos[1] = "";
                 c = 3;
             }
             if (c == 3) {
-                System.out.println("dos");
-                datos[2] = "";
+                //System.out.println("dos");
+                datos[2] = "sjflasjdlf";
                 //Debe esperar hasta que el proceso anterior haya finalizado
                 c = 4;
             }

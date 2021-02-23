@@ -7,19 +7,26 @@ package paquete_principal;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.util.Random;
 import java.util.Scanner;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Lopez
  */
 public class principal extends javax.swing.JFrame {
-      DefaultTableModel modelo;
+    DefaultTableModel modelo;
     String []datos=new String [31];
-
+    private int contadorNombre = 0;
+    String [] procesos = new String[16]; //como solo hasta 16 procesos podemos tener
+    Stack <Procesos>Procesos = new Stack();//aqui almaceno mis procesos
+    boolean [] procesosTabla = {false,false, false, false, false, false, false,false, false, false, false, false};
     /**
      * Creates new form principal
      */
@@ -40,36 +47,37 @@ public class principal extends javax.swing.JFrame {
         modelo.addColumn("Lista");
         tablita.setModel(modelo);*/
         
-        String anuncio="dato",lista="si";
-        HiloTamanio tamanio=new HiloTamanio();
-        int bloque = (int) (Math.random() * 16) + 1;// La cantidad de bloques que se desea ocupar
-            System.out.println("El bloque"+bloque);
-        //tamanio.settamanioBloques(bloque);
-        int espaciolibre=tamanio.getEspaciolibre();// dice cuanto espacio libre tiene la memoria
-            System.out.println("la memoria tiene"+ espaciolibre+ "bloques libres");
-        tamanio.setBloqueAnterior(0);// Se envia el numero (1-16) de bloques ya ocupados
-        tamanio.setBloque(16);// se manda el tamaño de bloques que ocupa el nuevo documento
-        tamanio.setTabla(tablita);
-        tamanio.activo=true;
-        tamanio.start();
-        boolean ver=tamanio.isLlena();// retorna un booleano , si es true la memoria ya esta llena si es false aún hay espacio
-        System.out.println("La memoria "+ ver + " llena");
-       /* for (int i = 0; i <16; i++) {            
-            datos[0]=String.valueOf(i);
-            datos[1]=anuncio;
-            datos[2]=lista;
-            modelo.addRow(datos);        
-        }*/
-        //this.tablita.setModel(modelo);
-       /* tablita.getColumnModel().getColumn(0).setCellRenderer(tcr);
-        ColorFila color= new ColorFila(1);
-        tablita.getColumnModel().getColumn(1).setCellRenderer(color);
-        ColorFila color2=new ColorFila(2);
-        tablita.getColumnModel().getColumn(2).setCellRenderer(color2);
-  
-        tcr.setHorizontalAlignment(SwingConstants.CENTER);*/
-        
-       
+//        String anuncio="dato",lista="si";
+//        HiloTamanio tamanio=new HiloTamanio();
+//        HiloTamanio algo = new HiloTamanio();
+////        int bloque = (int) (Math.random() * 16) + 1;// La cantidad de bloques que se desea ocupar
+////            System.out.println("El bloque "+bloque);
+//        //tamanio.settamanioBloques(bloque);
+//        int espaciolibre=tamanio.getEspaciolibre();// dice cuanto espacio libre tiene la memoria
+//            System.out.println("la memoria tiene "+ espaciolibre+ " bloques libres");
+//        tamanio.setBloqueAnterior(0);// Se envia el numero (1-16) de bloques ya ocupados
+//        tamanio.setBloque(3);// se manda el tamaño de bloques que ocupa el nuevo documento 
+//        tamanio.setTabla(tablita);
+//        tamanio.activo=true;
+//        tamanio.start();
+//        
+////        int espaciolibre2=tamanio.getEspaciolibre();// dice cuanto espacio libre tiene la memoria
+////            System.out.println("la memoria tiene "+ espaciolibre2+ " bloques libres");
+////        int guadalupe = 16 - espaciolibre2;
+////        algo.setBloqueAnterior(guadalupe);// Se envia el numero (1-16) de bloques ya ocupados
+////        algo.setBloque(3);// se manda el tamaño de bloques que ocupa el nuevo documento 
+////        algo.setTabla(tablita);
+////        algo.activo=true;
+////        algo.start();
+//        
+//        
+//        boolean ver=tamanio.isLlena();// retorna un booleano , si es true la memoria ya esta llena si es false aún hay espacio
+//        System.out.println("La memoria "+ ver + " llena");
+
+//        DibujandoProcesos hilo = new DibujandoProcesos();//este hilo comprueba si se debe agregar o eliminar procesos
+//        hilo.start();
+          verificarProcesos hilo = new verificarProcesos();
+          hilo.start();
     }
 
 
@@ -84,6 +92,10 @@ public class principal extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tablita = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        agregar = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        bloques = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -122,6 +134,17 @@ public class principal extends javax.swing.JFrame {
         tablita.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tablita);
 
+        jLabel1.setText("Bloques a ocupar del proceso");
+
+        agregar.setText("agregar");
+        agregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agregarActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Agregar proceso");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -130,18 +153,65 @@ public class principal extends javax.swing.JFrame {
                 .addGap(37, 37, 37)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(328, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bloques, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(agregar)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(126, 126, 126))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(43, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(265, 265, 265))
+                .addGap(46, 46, 46)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(agregar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bloques, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(86, 86, 86))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
+        Random rand = new Random();
+        int randInt = rand.nextInt(65535); //Genera numeros de 0 a 65535 que es nuestro espacio disponible
+        bloques.setText("");
+        Procesos process = new Procesos("P"+this.contadorNombre, randInt);
+        this.contadorNombre++;
+        System.out.println("tam "+ randInt+ " nombre " + process.getNombre());
+        bloques.setText(String.valueOf(process.getBloques()));
+        Procesos.add(process);//voy añadiendo los procesos conforme le van dando click
+        System.out.println(Procesos.get(Procesos.size()-1).getNombre());
+    }//GEN-LAST:event_agregarActionPerformed
+
+    public class verificarProcesos extends Thread{//sirve para ver si se dibuja o no 
+  
+        @Override
+        public void run(){
+            while(true){
+                System.out.println(Procesos.size());
+                if(Procesos.size() > 0){//hay procesos que meter en nuestro sistema
+                    System.out.println("Dibujar");
+                }
+                try {
+                    Thread.sleep(100);//revisaremos a cada cierto tiempo
+                } catch (InterruptedException ex) {
+                  System.out.println("Error en el hilo de dibujo");
+                }
+            }
+        }
+}
+
+    
     /**
      * @param args the command line arguments
      */
@@ -178,6 +248,10 @@ public class principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton agregar;
+    private javax.swing.JLabel bloques;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablita;
     // End of variables declaration//GEN-END:variables
