@@ -13,14 +13,14 @@ import javax.swing.table.*;
  *
  * @author ferna
  */
-public class DibujandoProcesos extends Thread{
+public class DibujandoProcesos{
     private int cont = 0;
     private JTable tabla;
-    private DefaultTableModel modelo;
     private String[] datos = new String[4];
 
     public DibujandoProcesos() {
-        new AlternateRowColorTableTest();
+        //new AlternateRowColorTableTest();
+        creandoTabla();
     }
      
     public JTable getTabla() {
@@ -31,12 +31,21 @@ public class DibujandoProcesos extends Thread{
         this.tabla = tabla;
     }
 
-    public DefaultTableModel getModelo() {
-        return modelo;
+    public void creandoTabla(){
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("Tam");
+        modelo.addColumn("No.");
+        modelo.addColumn("Documento");
+        modelo.addColumn("Estado");
+        tabla.setModel(modelo);
     }
-
-    public void setModelo(DefaultTableModel modelo) {
-        this.modelo = modelo;
+    
+    public void actualizar (Procesos procesoAux){
+        String[] datos = new String[4];//4 datos posibles necesitamos
+        datos[0] = "2";
+        datos[1] = "3";
+        datos[2] = "4";
+        datos[3] = "5";
     }
     public class AlternateRowColorTableTest extends JFrame {
         public AlternateRowColorTableTest() {
@@ -87,16 +96,16 @@ public class DibujandoProcesos extends Thread{
            setVisible(true);
        }
     }
-        @Override
-        public void run(){     
-            while(cont <= 100){
-                System.out.println("prueba");
-                cont++;
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException ex) {
-                  System.out.println("Error en el hilo de dibujo");
-                }
-            }
-        }
+//        @Override
+//        public void run(){     
+//            while(cont <= 100){
+//                System.out.println("prueba");
+//                cont++;
+//                try {
+//                    Thread.sleep(1000);
+//                } catch (InterruptedException ex) {
+//                  System.out.println("Error en el hilo de dibujo");
+//                }
+//            }
+//        }
 }

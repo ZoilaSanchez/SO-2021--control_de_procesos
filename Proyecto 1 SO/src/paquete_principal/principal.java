@@ -6,6 +6,7 @@
 package paquete_principal;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 import java.util.Random;
 import java.util.Scanner;
@@ -15,6 +16,9 @@ import javax.swing.table.DefaultTableModel;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.TableCellRenderer;
 
 /**
  *
@@ -26,7 +30,10 @@ public class principal extends javax.swing.JFrame {
     private int contadorNombre = 0;
     String [] procesos = new String[16]; //como solo hasta 16 procesos podemos tener
     Stack <Procesos>Procesos = new Stack();//aqui almaceno mis procesos
-    boolean [] procesosTabla = {false,false, false, false, false, false, false,false, false, false, false, false};
+    boolean [] procesosTabla = {false,false, false, false, false, false, false,false, false, false, false, false, false, false, false, false};
+    private JTable tabla;
+    private int insertar = 0;//si es 1 es porque hay datos que agregar a la tabla o eliminar
+    private int contadorDeListaProcesos=-1;//sirve para ver que proceso estamos viendo
     /**
      * Creates new form principal
      */
@@ -78,8 +85,6 @@ public class principal extends javax.swing.JFrame {
 //        hilo.start();
           verificarProcesos hilo = new verificarProcesos();
           hilo.start();
-          DibujandoProcesos tables = new DibujandoProcesos();
-          tables.start();
     }
 
 
@@ -185,7 +190,7 @@ public class principal extends javax.swing.JFrame {
 
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
         Random rand = new Random();
-        int randInt = rand.nextInt(127); //Genera numeros de 0 a 65535 que es nuestro espacio disponible
+        int randInt = rand.nextInt(63); //Genera numeros de 0 a 65535 que es nuestro espacio disponible
         bloques.setText("");
         Procesos procesoAux = new Procesos("aux", 0, 0,0,0);//ignorarlo solo lo uso para usar una funcion
         int guiaParaAsignarEspacios = procesoAux.saberBloquesAUtilizar(randInt);//me indica cuantos bloques de memoria debo buscar
@@ -193,7 +198,7 @@ public class principal extends javax.swing.JFrame {
         int contador = 0;
         int PosA = 0;
         int PosB = 0;
-        for(int i = 0; i<12; i++){
+        for(int i = 0; i<16; i++){
             if(contador != guiaParaAsignarEspacios){
                 System.out.println("contador es " + contador);
                 if(procesosTabla[i] == false){//hay espacio libre para asignar
@@ -213,22 +218,54 @@ public class principal extends javax.swing.JFrame {
                 System.out.println("Voy en i "+i+"  "+procesosTabla[i]);
             }     
         }
-        Procesos process = new Procesos("P"+this.contadorNombre, randInt,1,2,10);
-        this.contadorNombre++;
-        System.out.println("tam "+ randInt+ " nombre " + process.getNombre());
-        bloques.setText(String.valueOf(process.getBloques()));
-        Procesos.add(process);//voy añadiendo los procesos conforme le van dando click
-        System.out.println(Procesos.get(Procesos.size()-1).getNombre());
+        if(PosB != 0){//significa que encontro posiciones libres
+             Procesos process = new Procesos("P"+this.contadorNombre, randInt,PosA,PosB,10);
+            this.contadorNombre++;
+            System.out.println("tam "+ randInt+ " nombre " + process.getNombre());
+            bloques.setText(String.valueOf(process.getBloques()));
+            Procesos.add(process);//voy añadiendo los procesos conforme le van dando click
+    //        System.out.println(Procesos.get(Procesos.size()-1).getNombre());//guia para ver el ultimo proceso insertado
+            insertar++;
+            contadorDeListaProcesos++;//aqui podriamos cambiar y mandarle otro numero
+        }else{
+            JOptionPane.showMessageDialog(null, "Memoria llena, el proceso ocupaba " + guiaParaAsignarEspacios);
+        }
+       
     }//GEN-LAST:event_agregarActionPerformed
-
+ 
+    
+    
     public class verificarProcesos extends Thread{//sirve para ver si se dibuja o no 
-  
+        DefaultTableModel tables = new DefaultTableModel();
+        
+        public verificarProcesos(){
+            tables.addColumn("Tam");
+            tables.addColumn("No.");
+            tables.addColumn("Documento");
+            tables.addColumn("Estado");
+        }
         @Override
-        public void run(){
+        public void run(){//aqui dibujaremos
             while(true){
+                            System.out.println("toca insertar?" + insertar);
                 System.out.println(Procesos.size());
-                if(Procesos.size() > 0){//hay procesos que meter en nuestro sistema
-                    System.out.println("Dibujar");
+                if(insertar == 1){//hay procesos que meter en nuestro sistema
+                    if(Procesos.get(contadorDeListaProcesos).getBloques()!= 0){
+                        System.out.println("Dibujar");
+                        //System.out.println(Procesos.get(0).getBloques());
+                        String[] datos = new String[4];//4 datos posibles necesitamos
+                        datos[0] = " ";
+                        datos[1] = " ";
+                        datos[2] = " ";
+                        datos[3] = " ";
+                        tables.addRow(datos);
+                        Procesos.get(contadorDeListaProcesos).setBloques(Procesos.get(contadorDeListaProcesos).getBloques() - 1);
+                    }else{
+                        insertar = 0;//dejo de insertar
+                    }
+                    tablita.setModel(tables);
+
+                    
                 }
                 try {
                     Thread.sleep(100);//revisaremos a cada cierto tiempo
