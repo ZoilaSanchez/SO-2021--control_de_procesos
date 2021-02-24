@@ -13,14 +13,42 @@ public class Procesos {
     private String nombre;//nombre P1, P2 y Pn
     private int tam;//tamaño del proceso en bits todavia falta pasarlo a hexa
     private int bloques;
+    private int posA, posB;//son las posiciones donde empieza nuestro almacenamiento y donde termina
+    private int tiempoEjecucion;//cuanto tarda el proceso en ejecutarse
 
-    public Procesos(String nombre, int tam) {
+    public Procesos(String nombre, int tam, int posA, int posB, int tiempo) {
         this.nombre = nombre;
         this.tam = tam;
         this.bloques = this.saberBloquesAUtilizar(tam);
+        this.posA = posA;
+        this.posB = posB;
+        this.tiempoEjecucion = tiempo;
     }
 
-    
+    public void setPosA(int posA) {
+        this.posA = posA;
+    }
+
+    public void setPosB(int posB) {
+        this.posB = posB;
+    }
+
+    public void setTiempoEjecucion(int tiempoEjecucion) {
+        this.tiempoEjecucion = tiempoEjecucion;
+    }
+
+    public int getTiempoEjecucion() {
+        return tiempoEjecucion;
+    }
+
+    public int getPosA() {
+        return posA;
+    }
+
+    public int getPosB() {
+        return posB;
+    }
+ 
     public int getBloques() {
         return bloques;
     }

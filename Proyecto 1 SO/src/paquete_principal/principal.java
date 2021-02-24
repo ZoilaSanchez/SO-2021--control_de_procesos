@@ -78,6 +78,8 @@ public class principal extends javax.swing.JFrame {
 //        hilo.start();
           verificarProcesos hilo = new verificarProcesos();
           hilo.start();
+          DibujandoProcesos tables = new DibujandoProcesos();
+          tables.start();
     }
 
 
@@ -183,9 +185,35 @@ public class principal extends javax.swing.JFrame {
 
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
         Random rand = new Random();
-        int randInt = rand.nextInt(65535); //Genera numeros de 0 a 65535 que es nuestro espacio disponible
+        int randInt = rand.nextInt(127); //Genera numeros de 0 a 65535 que es nuestro espacio disponible
         bloques.setText("");
-        Procesos process = new Procesos("P"+this.contadorNombre, randInt);
+        Procesos procesoAux = new Procesos("aux", 0, 0,0,0);//ignorarlo solo lo uso para usar una funcion
+        int guiaParaAsignarEspacios = procesoAux.saberBloquesAUtilizar(randInt);//me indica cuantos bloques de memoria debo buscar
+        boolean asignar = true;
+        int contador = 0;
+        int PosA = 0;
+        int PosB = 0;
+        for(int i = 0; i<12; i++){
+            if(contador != guiaParaAsignarEspacios){
+                System.out.println("contador es " + contador);
+                if(procesosTabla[i] == false){//hay espacio libre para asignar
+                    if(contador == 0){//sera la posicion inicial del documento
+                       PosA = i;
+                       System.out.println("La posicion inicial es " + PosA);
+                    }
+                    if(contador == guiaParaAsignarEspacios-1){
+                        PosB = i;
+                        System.out.println("La posicion final es " + PosB);
+                    }
+                    procesosTabla[i] = true;//esto significa que esos espacios de la memoria estan llenos
+                    contador++;
+                }else{//encontro espacios asignados
+                    contador = 0;
+                }
+                System.out.println("Voy en i "+i+"  "+procesosTabla[i]);
+            }     
+        }
+        Procesos process = new Procesos("P"+this.contadorNombre, randInt,1,2,10);
         this.contadorNombre++;
         System.out.println("tam "+ randInt+ " nombre " + process.getNombre());
         bloques.setText(String.valueOf(process.getBloques()));
