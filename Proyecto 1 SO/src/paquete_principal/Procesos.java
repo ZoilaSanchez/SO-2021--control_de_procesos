@@ -25,6 +25,7 @@ public class Procesos {
         this.tiempoEjecucion = tiempo;
     }
 
+
     public void setPosA(int posA) {
         this.posA = posA;
     }
@@ -75,7 +76,7 @@ public class Procesos {
         int numeroGuia;
     do{
             numeroGuia = (int) Math.pow(2,contadorDe2);
-//            System.out.println("El numero Guia es " + numeroGuia);
+       //System.out.println("El numero Guia es " + numeroGuia);
             if(numeroGuia <= tam){
                 contadorDe2++;
             }

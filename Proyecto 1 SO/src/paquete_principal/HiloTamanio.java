@@ -83,7 +83,7 @@ public class HiloTamanio extends Thread {
 
         return tamañobloque;
     }
-
+            //++++
     public void settamanioBloques(int cantbloque) {
         /* if (cantbloque == 0) {
             JOptionPane.showMessageDialog(null, "No tiene tamaño");
