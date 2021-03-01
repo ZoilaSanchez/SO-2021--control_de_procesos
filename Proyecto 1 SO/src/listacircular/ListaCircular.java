@@ -9,6 +9,7 @@ package listacircular;
  *
  * @author jenif
  */
+
 public class ListaCircular {
     int tamaño;
     private Nodo ultimo;
@@ -35,12 +36,16 @@ public class ListaCircular {
     }
     
     public void mostrar(){
-        Nodo aux= ultimo.getSig();
+     if(!vacia()){
+            Nodo aux= ultimo.getSig();
         
         do{
            System.out.println(aux.getPosicion());
            aux=aux.getSig();
         }while(aux!=ultimo.getSig());
+     }else{
+         System.out.println("vacia");
+     }
     }
     public boolean eliminar(int p){
      Nodo a;

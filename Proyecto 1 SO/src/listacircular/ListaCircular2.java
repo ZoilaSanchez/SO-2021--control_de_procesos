@@ -18,7 +18,7 @@ public class ListaCircular2 {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws Exception {
+      public static void main(String[] args) throws Exception {
         // TODO code application logic here
         ListaCircular listita = new ListaCircular();
        
@@ -30,10 +30,18 @@ public class ListaCircular2 {
          listita.insertar(3,400);
         
          listita.mostrar();
-         
-         listita.eliminar(3);    
+           
          System.out.println("-------------");
          listita.mostrar();
+         if(!listita.vacia()){
+              listita.eliminar(0);
+               listita.eliminar(1);
+                listita.eliminar(2);
+                 listita.eliminar(3);  
+             System.out.println("esta llena");
+         }else{
+             System.out.println("vacia");
+         }
+         listita.mostrar();
     }
-    
 }
