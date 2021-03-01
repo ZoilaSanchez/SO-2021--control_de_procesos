@@ -47,6 +47,7 @@ public class ListaCircular {
          System.out.println("vacia");
      }
     }
+    
     public boolean eliminar(int p){
      Nodo a;
      boolean encontrado=false;

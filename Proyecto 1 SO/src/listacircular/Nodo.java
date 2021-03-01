@@ -13,6 +13,7 @@ public class Nodo {
     int dato;
     Nodo sig;
     int posicion;
+    
     public Nodo(int posi,int dato){
        this.dato=dato;
        this.posicion=posi;
