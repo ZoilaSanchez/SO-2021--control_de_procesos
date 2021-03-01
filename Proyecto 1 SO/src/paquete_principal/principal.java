@@ -14,18 +14,21 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.TableCellRenderer;
+import listacircular.ListaCircular;
 
 /**
  *
  * @author Lopez
  */
 public class principal extends javax.swing.JFrame implements Runnable  {
+    ListaCircular lista= new ListaCircular();
     String hora, minutos, segundos, ampm;
     Calendar calendario;
     Thread h1;
@@ -38,6 +41,12 @@ public class principal extends javax.swing.JFrame implements Runnable  {
     private JTable tabla;
     private int insertar = 0;//si es 1 es porque hay datos que agregar a la tabla o eliminar
     private int contadorDeListaProcesos=-1;//sirve para ver que proceso estamos viendo
+    int dato =0 ;
+    int cont=0;
+   // String nombre = "";
+    //int tamanio;
+    double tiempo_llegada;
+   // double duracion, auxduracion;
     /**
      * Creates new form principal
      */
@@ -93,7 +102,7 @@ public class principal extends javax.swing.JFrame implements Runnable  {
           hilo.start();
     }
 
-
+ double duracion2 = ThreadLocalRandom.current().nextInt(5, 15 + 1);//Genera numeros entre 5 y 15
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -198,13 +207,17 @@ public class principal extends javax.swing.JFrame implements Runnable  {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(bloques, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(agregar)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(84, 84, 84))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lblReloj)
-                .addGap(150, 150, 150))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(lblReloj)
+                        .addGap(150, 150, 150))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(25, 25, 25))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -235,6 +248,8 @@ public class principal extends javax.swing.JFrame implements Runnable  {
     
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
         Random rand = new Random();
+        tiempo_llegada = Double.parseDouble(segundos);
+     
         int randInt = rand.nextInt(63); //Genera numeros de 0 a 65535 que es nuestro espacio disponible
         bloques.setText("");
         Procesos procesoAux = new Procesos("aux", 0, 0,0,0);//ignorarlo solo lo uso para usar una funcion
@@ -275,6 +290,11 @@ public class principal extends javax.swing.JFrame implements Runnable  {
              Procesos process = new Procesos("P"+this.contadorNombre, randInt,PosA,PosB,10);
             this.contadorNombre++;
             System.out.println("tam "+ randInt+ " nombre " + process.getNombre());
+            //Se agreaga a la lista circular
+             lista.insertar(cont,dato, process.getNombre(),randInt, tiempo_llegada, duracion2);
+             cont++;
+             //Omitir este contador de dato++, solo sirve para Dato
+             dato++;
 //            double Ejecutandose = (int) Math.pow(2,randInt);
 //            int Resul = (int) (Ejecutandose-1);
             jLabel5.setText(String.valueOf(randInt));
@@ -286,6 +306,12 @@ public class principal extends javax.swing.JFrame implements Runnable  {
         }else{
             JOptionPane.showMessageDialog(null, "Memoria llena, el proceso ocupaba " + guiaParaAsignarEspacios);
         }
+     
+      
+       System.out.println("------------");
+       System.out.println("Ver");
+       lista.mostrar(); 
+       System.out.println("------------");
 
     }//GEN-LAST:event_agregarActionPerformed
 
