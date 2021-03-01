@@ -10,14 +10,55 @@ package listacircular;
  * @author jenif
  */
 public class Nodo {
-    int dato;
-    Nodo sig;
+      Nodo sig;
     int posicion;
+    int dato;
+    String nombre;
+    int tamanio;
+    double tiempo_llegada;
+    double duracion;
+   
     
-    public Nodo(int posi,int dato){
+    public Nodo(int posi,int dato, String nombre,int tamanio, double tiempo_llegada,double duracion){
        this.dato=dato;
+       this.nombre=nombre;
+       this.tamanio=tamanio;
+       this.tiempo_llegada=tiempo_llegada;
+       this.duracion=duracion;
        this.posicion=posi;
        sig=this; // siempre apunta a el mismo 
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public int getTamanio() {
+        return tamanio;
+    }
+
+    public void setTamanio(int tamanio) {
+        this.tamanio = tamanio;
+    }
+
+    public double getTiempo_llegada() {
+        return tiempo_llegada;
+    }
+
+    public void setTiempo_llegada(double tiempo_llegada) {
+        this.tiempo_llegada = tiempo_llegada;
+    }
+
+    public double getDuracion() {
+        return duracion;
+    }
+
+    public void setDuracion(double duracion) {
+        this.duracion = duracion;
     }
 
     public int getPosicion() {
@@ -46,11 +87,5 @@ public class Nodo {
     
     
     
-    
-       
-
-    
-     
-     
      
 }

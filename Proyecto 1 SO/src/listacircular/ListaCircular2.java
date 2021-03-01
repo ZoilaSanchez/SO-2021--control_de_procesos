@@ -24,15 +24,20 @@ public class ListaCircular2 {
        
          double random = ThreadLocalRandom.current().nextInt(5, 10 + 1);
        
-         listita.insertar(0,200);
+       /*  listita.insertar(0,200);
          listita.insertar(1,100);
          listita.insertar(2,300);
-         listita.insertar(3,400);
-        
+         listita.insertar(3,400);*/
+        ///////////////////////////////////////////////
+        listita.insertar(0,200,"Proceso A", 10, 0, random);
+         listita.insertar(1,100,"Proceso B", 10, 0, random);
+         listita.insertar(2,300,"Proceso C", 10, 3, 13);
+         listita.insertar(3,400,"Proceso D", 10, 7, 19);
          listita.mostrar();
            
          System.out.println("-------------");
          listita.mostrar();
+          System.out.println("-------------");
          if(!listita.vacia()){
               listita.eliminar(0);
                listita.eliminar(1);

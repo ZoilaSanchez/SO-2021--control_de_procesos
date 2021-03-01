@@ -23,15 +23,14 @@ public class ListaCircular {
     }
     // insertar nodos
     
-    public ListaCircular insertar(int posicion,int dato){
-        Nodo nuevo= new Nodo(posicion,dato);
+    public ListaCircular insertar(int posicion,int dato,String nombre,int tamanio, double tiempo_llegada,double duracion){
+        Nodo nuevo= new Nodo(posicion,dato,nombre,tamanio,tiempo_llegada,duracion);
         if(ultimo!=null){
             nuevo.setSig(ultimo.getSig());
             ultimo.setSig(nuevo);
         }
             ultimo=nuevo;
             return this;
-        
         
     }
     
