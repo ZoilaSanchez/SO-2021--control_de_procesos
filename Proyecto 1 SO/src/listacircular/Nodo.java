@@ -10,47 +10,17 @@ package listacircular;
  * @author jenif
  */
 public class Nodo {
-      Nodo sig;
-    int posicion;
-    int dato;
-    String nombre;
-    int tamanio;
-    double tiempo_llegada;
-    double duracion;
-   
-    
-    public Nodo(int posi,int dato, String nombre,int tamanio, double tiempo_llegada,double duracion){
-       this.dato=dato;
+      double duracion,tiempo_llegada;
+      int posi,tamanio;
+      String nombre;
+
+    public Nodo(int posi,String nombre,int tamanio, double tiempo_llegada,double duracion){
+     
        this.nombre=nombre;
        this.tamanio=tamanio;
        this.tiempo_llegada=tiempo_llegada;
        this.duracion=duracion;
-       this.posicion=posi;
-       sig=this; // siempre apunta a el mismo 
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public int getTamanio() {
-        return tamanio;
-    }
-
-    public void setTamanio(int tamanio) {
-        this.tamanio = tamanio;
-    }
-
-    public double getTiempo_llegada() {
-        return tiempo_llegada;
-    }
-
-    public void setTiempo_llegada(double tiempo_llegada) {
-        this.tiempo_llegada = tiempo_llegada;
+       this.posi=posi;
     }
 
     public double getDuracion() {
@@ -61,30 +31,39 @@ public class Nodo {
         this.duracion = duracion;
     }
 
-    public int getPosicion() {
-        return posicion;
+    public double getTiempo_llegada() {
+        return tiempo_llegada;
     }
 
-    public void setPosicion(int posicion) {
-        this.posicion = posicion;
+    public void setTiempo_llegada(double tiempo_llegada) {
+        this.tiempo_llegada = tiempo_llegada;
     }
 
-    public int getDato() {
-        return dato;
+    public int getPosi() {
+        return posi;
     }
 
-    public void setDato(int dato) {
-        this.dato = dato;
+    public void setPosi(int posi) {
+        this.posi = posi;
     }
 
-    public Nodo getSig() {
-        return sig;
+    public int getTamanio() {
+        return tamanio;
     }
 
-    public void setSig(Nodo sig) {
-        this.sig = sig;
+    public void setTamanio(int tamanio) {
+        this.tamanio = tamanio;
     }
-    
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+        
     
     
      

@@ -6,103 +6,60 @@
 package paquete_principal;
 
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Font;
 import java.util.Random;
 import java.util.Scanner;
-import javax.swing.SwingConstants;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import javax.swing.table.TableCellRenderer;
-import listacircular.ListaCircular;
+import listacircular.Nodo;
 
 /**
  *
  * @author Lopez
  */
-public class principal extends javax.swing.JFrame implements Runnable  {
-    ListaCircular lista= new ListaCircular();
+public class principal extends javax.swing.JFrame implements Runnable {
+
+    // proceso para crear una lista
+    ArrayList<Nodo> lista;
+    int tamaño_lista;
     String hora, minutos, segundos, ampm;
     Calendar calendario;
     Thread h1;
     DefaultTableModel modelo;
-    String []datos=new String [31];
+    String[] datos = new String[31];
     private int contadorNombre = 0;
-    String [] procesos = new String[16]; //como solo hasta 16 procesos podemos tener
-    Stack <Procesos>Procesos = new Stack();//aqui almaceno mis procesos
-    boolean [] procesosTabla = {false,false, false, false, false, false, false,false, false, false, false, false, false, false, false, false};
+    String[] procesos = new String[16]; //como solo hasta 16 procesos podemos tener
+    Stack<Procesos> Procesos = new Stack();//aqui almaceno mis procesos
+    boolean[] procesosTabla = {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false};
     private JTable tabla;
     private int insertar = 0;//si es 1 es porque hay datos que agregar a la tabla o eliminar
-    private int contadorDeListaProcesos=-1;//sirve para ver que proceso estamos viendo
-    int dato =0 ;
-    int cont=0;
-   // String nombre = "";
-    //int tamanio;
-    double tiempo_llegada;
-   // double duracion, auxduracion;
+    private int contadorDeListaProcesos = -1;//sirve para ver que proceso estamos viendo
+    int tiempo_llegada;
+
     /**
      * Creates new form principal
      */
     public principal() {
         initComponents();
         mostrardatos();
-         h1 = new Thread(this);
+        h1 = new Thread(this);
         h1.start();
-    }
-        public void mostrardatos(){
-      /* tablita.getTableHeader().setFont(new Font("Arial", 1, 13));
-        // cambia el fondo del encabezado de la tabla
-        tablita.getTableHeader().setBackground(Color.WHITE);
-        // cambia el color de la letra del encabezado de la tabla
-        tablita.getTableHeader().setForeground(Color.BLACK);
-        modelo= new DefaultTableModel();
-        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
-        modelo.addColumn("No.");
-        modelo.addColumn("[ ]");
-        modelo.addColumn("Lista");
-        tablita.setModel(modelo);*/
-        
-//        String anuncio="dato",lista="si";
-//        HiloTamanio tamanio=new HiloTamanio();
-//        HiloTamanio algo = new HiloTamanio();
-////        int bloque = (int) (Math.random() * 16) + 1;// La cantidad de bloques que se desea ocupar
-////            System.out.println("El bloque "+bloque);
-//        //tamanio.settamanioBloques(bloque);
-//        int espaciolibre=tamanio.getEspaciolibre();// dice cuanto espacio libre tiene la memoria
-//            System.out.println("la memoria tiene "+ espaciolibre+ " bloques libres");
-//        tamanio.setBloqueAnterior(0);// Se envia el numero (1-16) de bloques ya ocupados
-//        tamanio.setBloque(3);// se manda el tamaño de bloques que ocupa el nuevo documento 
-//        tamanio.setTabla(tablita);
-//        tamanio.activo=true;
-//        tamanio.start();
-//        
-////        int espaciolibre2=tamanio.getEspaciolibre();// dice cuanto espacio libre tiene la memoria
-////            System.out.println("la memoria tiene "+ espaciolibre2+ " bloques libres");
-////        int guadalupe = 16 - espaciolibre2;
-////        algo.setBloqueAnterior(guadalupe);// Se envia el numero (1-16) de bloques ya ocupados
-////        algo.setBloque(3);// se manda el tamaño de bloques que ocupa el nuevo documento 
-////        algo.setTabla(tablita);
-////        algo.activo=true;
-////        algo.start();
-//        
-//        
-//        boolean ver=tamanio.isLlena();// retorna un booleano , si es true la memoria ya esta llena si es false aún hay espacio
-//        System.out.println("La memoria "+ ver + " llena");
+        tamaño_lista = 0;
+        lista = new ArrayList<Nodo>();
 
-//        DibujandoProcesos hilo = new DibujandoProcesos();//este hilo comprueba si se debe agregar o eliminar procesos
-//        hilo.start();
-          verificarProcesos hilo = new verificarProcesos();
-          hilo.start();
     }
 
- double duracion2 = ThreadLocalRandom.current().nextInt(5, 15 + 1);//Genera numeros entre 5 y 15
+    public void mostrardatos() {
+        verificarProcesos hilo = new verificarProcesos();
+        hilo.start();
+    }
+
+    double duracion2 = ThreadLocalRandom.current().nextInt(5, 15 + 1);//Genera numeros entre 5 y 15
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -123,6 +80,11 @@ public class principal extends javax.swing.JFrame implements Runnable  {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         lblReloj = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        mitablita = new javax.swing.JTable();
+        color = new javax.swing.JPanel();
+        as = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -183,141 +145,342 @@ public class principal extends javax.swing.JFrame implements Runnable  {
 
         lblReloj.setText("HORA");
 
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        mitablita.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "No", "Nombre", "Tamaño", "Tiempo L", "Duracion", "Estado"
+            }
+        ));
+        jScrollPane2.setViewportView(mitablita);
+
+        as.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        javax.swing.GroupLayout colorLayout = new javax.swing.GroupLayout(color);
+        color.setLayout(colorLayout);
+        colorLayout.setHorizontalGroup(
+            colorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(as, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        colorLayout.setVerticalGroup(
+            colorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, colorLayout.createSequentialGroup()
+                .addContainerGap(20, Short.MAX_VALUE)
+                .addComponent(as, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(color, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addComponent(DirH)
-                        .addGap(31, 31, 31))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel5)))))
-                .addGap(65, 65, 65)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(bloques, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(agregar)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(84, 84, 84))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lblReloj)
-                        .addGap(150, 150, 150))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(25, 25, 25))))
+                                .addGap(207, 207, 207)
+                                .addComponent(lblReloj)
+                                .addGap(227, 227, 227))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(29, 29, 29)
+                                        .addComponent(jLabel4)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel5)
+                                        .addGap(191, 191, 191))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(DirH)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(130, 130, 130)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(36, 36, 36)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(bloques, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(21, 21, 21)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(113, 113, 113)
+                                .addComponent(agregar)))
+                        .addContainerGap(144, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(266, 266, 266)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 549, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(DirH)
-                    .addComponent(agregar))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(bloques, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(lblReloj)
-                .addGap(50, 50, 50))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(color, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(3, 3, 3)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(agregar)
+                                .addGap(70, 70, 70)
+                                .addComponent(bloques, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(27, 27, 27)
+                                .addComponent(lblReloj))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(78, 78, 78)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(jLabel3)
+                                            .addComponent(DirH))
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(108, 108, 108))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jButton1))
+                                        .addGap(131, 131, 131)))))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+    int posiproceso;
+
+    // mi clase hilo algoritmo completo
+    public class mihilo extends Thread {
+
+        int posiciontabla = 0;
+        int contadorprogres = 0;
+
+        @Override
+        public void run() {
+            while (tamaño_lista > 0) {
+                int cont = 0;
+                Iterator<Nodo> itrNodo = lista.iterator();
+                while (itrNodo.hasNext()) {
+                    Nodo listado = itrNodo.next();
+                    System.out.println("posciones de tabla " + posiciontabla);
+                    if (listado.getDuracion() <= 10) {
+                        int posiproceso = (int) (mitablita.getValueAt(listado.getPosi(), 0));
+                        System.out.println("proce eliminado : " + listado.getNombre() + " cantidad " + listado.getDuracion());
+                        for (int i = (int) listado.getDuracion(); i >= 0; i--) {
+                            if (i == 0) {
+                                try {
+                                    mitablita.setValueAt("Termindo", posiproceso, 5);
+                                    color.setBackground(Color.RED);
+                                    as.setText(listado.getNombre());
+                                    mitablita.setValueAt(0, posiproceso, 4);
+                                    Thread.sleep(100);
+                                } catch (InterruptedException ex) {
+                                    Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                            } else {
+                                try {
+                                    System.out.println("Ejecutando......" + i);
+//                                    pruebas.setText(listado.getDuracion() + "Ejecutando1........ " + i);
+                                    color.setBackground(Color.GREEN);
+                                    as.setText(listado.getNombre());
+                                    System.out.println(posiproceso + " prestar atecion aquiiiiiiiiiiiiiiiiiiiiiii");
+                                    mitablita.setValueAt(i, posiproceso, 4);
+                                    mitablita.setValueAt("Ejecutando... ", posiproceso, 5);
+                                    Thread.sleep(100);
+                                } catch (InterruptedException ex) {
+                                    Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                            }
+                        }
+                        itrNodo.remove();
+                        tamaño_lista--;
+                    } else if (listado.getDuracion() > 10) {
+                        System.out.println(listado.getDuracion() + "atencion ---------------------------------------------");
+                        int posiproceso = (int) (mitablita.getValueAt(listado.getPosi(), 0));
+//                        pruebas.setText("proce desconetar : " + listado.getNombre() + " cantidad Inicial " + listado.getDuracion());
+                        for (int i = (int) listado.getDuracion(); i > listado.getDuracion() - 10; i--) {
+                            try {
+//                                pruebas.setText(listado.getDuracion() + " Ejecutando2........ " + i);
+                                color.setBackground(Color.GREEN);
+                                as.setText(listado.getNombre());
+                                System.out.println(posiproceso + " prestar atecion aquiiiiiiiiiiiiiiiiiiiiiii");
+                                mitablita.setValueAt(i, posiproceso, 4);
+                                mitablita.setValueAt("Ejecutando.... ", posiproceso, 5);
+                                Thread.sleep(100);
+                            } catch (InterruptedException ex) {
+                                Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                        double duracio = (listado.getDuracion() - 10);
+                        System.out.println("estrando al 2do");
+//                        pruebas.setText("Listo........ ");
+                        color.setBackground(Color.YELLOW);
+                        as.setText(listado.getNombre());
+                        mitablita.setValueAt("Listo ... ", posiproceso, 5);
+                        listado.setDuracion(duracio);
+                    }
+                }
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            agregar.setEnabled(true);
+            as.setText("");
+            color.setBackground(Color.WHITE);
+            DefaultTableModel modelo = (DefaultTableModel) mitablita.getModel();
+            int numDatos = modelo.getRowCount();
+            for (int i = 0; i < numDatos; i++) {
+                modelo.removeRow(0);
+            }
+        }
+    }
+
+    public void datotabla(int posicion, String nombre, int tamaño, int tiempolle, int duracion, String estado) {
+        DefaultTableModel modelo = (DefaultTableModel) mitablita.getModel();
+        Object[] fila = new Object[6];
+        fila[0] = posicion;
+        fila[1] = nombre;
+        fila[2] = tamaño;
+        fila[3] = tiempolle;
+        fila[4] = duracion;
+        fila[5] = estado;
+        modelo.addRow(fila);
+        mitablita.setModel(modelo);
+
+    }
+
+    // metodos de la lista
+    public void insertar(String nombre, int tamanio, int tiempo_llegada, int duracion) {
+//        int posi,String nombre,int tamanio, double tiempo_llegada,double duracion
+        lista.add(new Nodo(tamaño_lista, nombre, tamanio, tiempo_llegada, duracion));
+        datotabla(tamaño_lista, nombre, tamanio, tiempo_llegada, duracion, "Listo");
+        tamaño_lista++;
+    }
+
+    public void mostra() {
+        Iterator<Nodo> itrPartidos = lista.iterator();
+        while (itrPartidos.hasNext()) {
+            Nodo partido = itrPartidos.next();
+            System.out.println(partido.getNombre() + " - "
+                    + partido.getDuracion() + ""
+            );
+        }
+    }
+
+    public void eliminar(int pos) {
+        Iterator<Nodo> itrnodo = lista.iterator();
+        while (itrnodo.hasNext()) {
+            Nodo listado = itrnodo.next();
+            if (listado.getPosi() == pos) {
+                System.out.println("encontrado " + listado.getPosi());
+                lista.remove(pos);
+            }
+        }
+    }
+
+    public Nodo existe(int pos) {
+        Nodo x = null;
+        Iterator<Nodo> itrnodo = lista.iterator();
+        while (itrnodo.hasNext()) {
+            Nodo listado = itrnodo.next();
+            if (listado.getPosi() == pos) {
+                System.out.println("encontrado " + listado.getPosi());
+                x = listado;
+            }
+        }
+        return x;
+    }
+
+
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
         Random rand = new Random();
-        tiempo_llegada = Double.parseDouble(segundos);
-     
+        tiempo_llegada = Integer.parseInt(segundos);
         int randInt = rand.nextInt(63); //Genera numeros de 0 a 65535 que es nuestro espacio disponible
         bloques.setText("");
-        Procesos procesoAux = new Procesos("aux", 0, 0,0,0);//ignorarlo solo lo uso para usar una funcion
+        Procesos procesoAux = new Procesos("aux", 0, 0, 0, 0);//ignorarlo solo lo uso para usar una funcion
         int guiaParaAsignarEspacios = procesoAux.saberBloquesAUtilizar(randInt);//me indica cuantos bloques de memoria debo buscar
         boolean asignar = true;
         int contador = 0;
         int PosA = 0;
         int PosB = 0;
-    
-        for(int i = 0; i<16; i++){
-            
-            if(contador != guiaParaAsignarEspacios){
+
+        for (int i = 0; i < 16; i++) {
+            if (contador != guiaParaAsignarEspacios) {
                 System.out.println("contador es " + contador);
-                if(procesosTabla[i] == false){//hay espacio libre para asignar
-                    if(contador == 0){//sera la posicion inicial del documento
-                       PosA = i;
-                       System.out.println("La posicion inicial es " + PosA);
+                if (procesosTabla[i] == false) {//hay espacio libre para asignar
+                    if (contador == 0) {//sera la posicion inicial del documento
+                        PosA = i;
+                        System.out.println("La posicion inicial es " + PosA);
                     }
-                    if(contador == guiaParaAsignarEspacios-1){
+                    if (contador == guiaParaAsignarEspacios - 1) {
                         PosB = i;
-                       //Direccion en decimales 2^n-1
-                       double Dir = (int) Math.pow(2,PosB);
-                       int Total = (int) (Dir-1);
-                       DirH.setText(String.valueOf(Total));
+                        //Direccion en decimales 2^n-1
+                        double Dir = (int) Math.pow(2, PosB);
+                        int Total = (int) (Dir - 1);
+                        DirH.setText(String.valueOf(Total));
                         System.out.println("La posicion final es " + PosB);
-                        
                     }
                     procesosTabla[i] = true;//esto significa que esos espacios de la memoria estan llenos
                     contador++;
-                    
-                }else{//encontro espacios asignados
+
+                } else {//encontro espacios asignados
                     contador = 0;
                 }
-                System.out.println("Voy en i "+i+"  "+procesosTabla[i]);
-            }    
+                System.out.println("Voy en i " + i + "  " + procesosTabla[i]);
+            }
         }
-        if(PosB != 0){//significa que encontro posiciones libres
-             Procesos process = new Procesos("P"+this.contadorNombre, randInt,PosA,PosB,10);
+        if (PosB != 0) {//significa que encontro posiciones libres
+            Procesos process = new Procesos("P" + this.contadorNombre, randInt, PosA, PosB, 10);
             this.contadorNombre++;
-            System.out.println("tam "+ randInt+ " nombre " + process.getNombre());
+//            System.out.println("tam "+ randInt+ " nombre " + process.getNombre()+" tiempollegada "+tiempo_llegada+" duracion "+ duracion2);
             //Se agreaga a la lista circular
-             lista.insertar(cont,dato, process.getNombre(),randInt, tiempo_llegada, duracion2);
-             cont++;
-             //Omitir este contador de dato++, solo sirve para Dato
-             dato++;
-//            double Ejecutandose = (int) Math.pow(2,randInt);
-//            int Resul = (int) (Ejecutandose-1);
+            int duracion_limite = (int) (Math.random() * (16 - 5)) + 5;
+            insertar(process.getNombre(), randInt, tiempo_llegada, duracion_limite);
+            System.out.println("agregando datos ......................");
             jLabel5.setText(String.valueOf(randInt));
             bloques.setText(String.valueOf(process.getBloques()));
             Procesos.add(process);//voy añadiendo los procesos conforme le van dando click
-    //        System.out.println(Procesos.get(Procesos.size()-1).getNombre());//guia para ver el ultimo proceso insertado
             insertar++;
             contadorDeListaProcesos++;//aqui podriamos cambiar y mandarle otro numero
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Memoria llena, el proceso ocupaba " + guiaParaAsignarEspacios);
         }
-     
-      
-       System.out.println("------------");
-       System.out.println("Ver");
-       lista.mostrar(); 
-       System.out.println("------------");
 
     }//GEN-LAST:event_agregarActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        agregar.setEnabled(false);
+        mihilo hilo = new mihilo();
+        hilo.start();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     @Override
     public void run() {
-          Thread ct = Thread.currentThread();
+        Thread ct = Thread.currentThread();
         while (ct == h1) {
             calcula();
             lblReloj.setText(hora + ":" + minutos + ":" + segundos + " " + ampm);
@@ -329,7 +492,8 @@ public class principal extends javax.swing.JFrame implements Runnable  {
             }
         }
     }
-      private void calcula() {
+
+    private void calcula() {
         Calendar calendario = new GregorianCalendar();
         Date fechaHoraActual = new Date();
 
@@ -346,27 +510,25 @@ public class principal extends javax.swing.JFrame implements Runnable  {
         segundos = calendario.get(Calendar.SECOND) > 9 ? "" + calendario.get(Calendar.SECOND) : "0" + calendario.get(Calendar.SECOND);
     }
 
-    
-    
- 
-    
-    public class verificarProcesos extends Thread{//sirve para ver si se dibuja o no 
+    public class verificarProcesos extends Thread {//sirve para ver si se dibuja o no 
+
         DefaultTableModel tables = new DefaultTableModel();
-        
-        public verificarProcesos(){
+
+        public verificarProcesos() {
             tables.addColumn("Tam");
             tables.addColumn("No.");
             tables.addColumn("Documento");
             tables.addColumn("Estado");
         }
+
         @Override
-        public void run(){//aqui dibujaremos
-            while(true){
+        public void run() {//aqui dibujaremos
+            while (true) {
                 System.out.println("toca insertar?" + insertar);
-                System.out.println(Procesos.size());   
-                 
-                if(insertar == 1){//hay procesos que meter en nuestro sistema
-                    if(Procesos.get(contadorDeListaProcesos).getBloques()!= 0){
+                System.out.println(Procesos.size());
+
+                if (insertar == 1) {//hay procesos que meter en nuestro sistema
+                    if (Procesos.get(contadorDeListaProcesos).getBloques() != 0) {
                         System.out.println("Dibujar");
                         //System.out.println(Procesos.get(0).getBloques());
                         String[] datos = new String[4];//4 datos posibles necesitamos
@@ -376,23 +538,22 @@ public class principal extends javax.swing.JFrame implements Runnable  {
                         datos[3] = " ";
                         tables.addRow(datos);
                         Procesos.get(contadorDeListaProcesos).setBloques(Procesos.get(contadorDeListaProcesos).getBloques() - 1);
-                    }else{
+                    } else {
                         insertar = 0;//dejo de insertar
                     }
                     tablita.setModel(tables);
 
-                    
                 }
                 try {
                     Thread.sleep(1000);//revisaremos a cada cierto tiempo
                 } catch (InterruptedException ex) {
-                  System.out.println("Error en el hilo de dibujo");
+                    System.out.println("Error en el hilo de dibujo");
                 }
             }
         }
 
-       
     }
+
     //pasar la direccion a Hexadecimal
     public String DireccionHexadecimal(int decimal) {
         Scanner teclado = new Scanner(System.in);
@@ -407,6 +568,7 @@ public class principal extends javax.swing.JFrame implements Runnable  {
         }
         return hexadecimal2 + "h";
     }
+
     /**
      * @param args the command line arguments
      */
@@ -445,14 +607,19 @@ public class principal extends javax.swing.JFrame implements Runnable  {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel DirH;
     private javax.swing.JButton agregar;
+    private javax.swing.JLabel as;
     private javax.swing.JLabel bloques;
+    private javax.swing.JPanel color;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblReloj;
+    private javax.swing.JTable mitablita;
     private javax.swing.JTable tablita;
     // End of variables declaration//GEN-END:variables
 }
