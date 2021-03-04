@@ -24,6 +24,8 @@ import listacircular.Nodo;
 public class principal extends javax.swing.JFrame implements Runnable {
 
     // proceso para crear una lista
+    int bloque = 0;
+    int posI = 0, posF = 0, tamañobloque;
     ArrayList<Nodo> lista;
     int tamaño_lista;
     String hora, minutos, segundos, ampm;
@@ -58,6 +60,26 @@ public class principal extends javax.swing.JFrame implements Runnable {
         hilo.start();
     }
 
+    public String Hexadecimales(int decimal) {
+        Scanner teclado = new Scanner(System.in);
+        teclado.close();
+        char digitosH[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+        String hexadecimal2 = "";
+        int resto, aux = decimal;
+
+        //for (int i = decimal - 1; i >= 0; i--) {
+        while (aux > 0) {
+            resto = aux % 16;
+            hexadecimal2 = digitosH[resto] + hexadecimal2;
+            aux /= 16;
+        }
+        System.out.printf("%n%nMétodo 2 -> Decimal: %d, Hexadecimal: %sh", decimal, hexadecimal2, "h");
+        return hexadecimal2 + "h";
+        /* System.out.printf("%n%nMétodo 2 -> Decimal: %d, Hexadecimal: %s", i + 1, hexadecimal2);
+            hexadecimal2 = "";
+            aux = i;
+        }*/
+    }
     double duracion2 = ThreadLocalRandom.current().nextInt(5, 15 + 1);//Genera numeros entre 5 y 15
 
     /**
@@ -168,7 +190,7 @@ public class principal extends javax.swing.JFrame implements Runnable {
         color.setLayout(colorLayout);
         colorLayout.setHorizontalGroup(
             colorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(as, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(as, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
         );
         colorLayout.setVerticalGroup(
             colorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -184,32 +206,34 @@ public class principal extends javax.swing.JFrame implements Runnable {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(42, 42, 42)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(color, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(color, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(207, 207, 207)
+                                .addGap(184, 184, 184)
                                 .addComponent(lblReloj)
                                 .addGap(227, 227, 227))
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(29, 29, 29)
-                                        .addComponent(jLabel4)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jLabel5)
-                                        .addGap(191, 191, 191))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(130, 130, 130))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(DirH)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
-                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(130, 130, 130)
+                                        .addGap(6, 6, 6)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel3)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(DirH))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel4)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(jLabel5)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(36, 36, 36)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -219,21 +243,16 @@ public class principal extends javax.swing.JFrame implements Runnable {
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(113, 113, 113)
                                 .addComponent(agregar)))
-                        .addContainerGap(144, Short.MAX_VALUE))
+                        .addContainerGap(309, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(266, 266, 266)
+                        .addGap(243, 243, 243)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 549, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(366, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(color, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(3, 3, 3)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(44, 44, 44)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -251,11 +270,7 @@ public class principal extends javax.swing.JFrame implements Runnable {
                                     .addComponent(jLabel5))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(78, 78, 78)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(jLabel3)
-                                            .addComponent(DirH))
-                                        .addGap(18, 18, 18)
+                                        .addGap(118, 118, 118)
                                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(108, 108, 108))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -263,7 +278,17 @@ public class principal extends javax.swing.JFrame implements Runnable {
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jButton1))
-                                        .addGap(131, 131, 131)))))))
+                                        .addGap(131, 131, 131))))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel3)
+                                .addComponent(DirH))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(color, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(3, 3, 3)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -356,6 +381,13 @@ public class principal extends javax.swing.JFrame implements Runnable {
             for (int i = 0; i < numDatos; i++) {
                 modelo.removeRow(0);
             }
+            DefaultTableModel modelo2 = (DefaultTableModel) tablita.getModel();
+            int numDatos2 = modelo2.getRowCount();
+            for (int i = 0; i < numDatos2; i++) {
+                modelo2.removeRow(0);
+            }
+            boolean[] x = {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false};
+            procesosTabla=x;
         }
     }
 
@@ -423,6 +455,7 @@ public class principal extends javax.swing.JFrame implements Runnable {
         bloques.setText("");
         Procesos procesoAux = new Procesos("aux", 0, 0, 0, 0);//ignorarlo solo lo uso para usar una funcion
         int guiaParaAsignarEspacios = procesoAux.saberBloquesAUtilizar(randInt);//me indica cuantos bloques de memoria debo buscar
+        bloque = guiaParaAsignarEspacios;
         boolean asignar = true;
         int contador = 0;
         int PosA = 0;
@@ -435,6 +468,7 @@ public class principal extends javax.swing.JFrame implements Runnable {
                     if (contador == 0) {//sera la posicion inicial del documento
                         PosA = i;
                         System.out.println("La posicion inicial es " + PosA);
+
                     }
                     if (contador == guiaParaAsignarEspacios - 1) {
                         PosB = i;
@@ -466,6 +500,10 @@ public class principal extends javax.swing.JFrame implements Runnable {
             Procesos.add(process);//voy añadiendo los procesos conforme le van dando click
             insertar++;
             contadorDeListaProcesos++;//aqui podriamos cambiar y mandarle otro numero
+            posI = PosA;
+            posF = PosB;
+            System.out.println("posI" + posI);
+            System.out.println("posF" + posF);
         } else {
             JOptionPane.showMessageDialog(null, "Memoria llena, el proceso ocupaba " + guiaParaAsignarEspacios);
         }
@@ -510,6 +548,17 @@ public class principal extends javax.swing.JFrame implements Runnable {
         segundos = calendario.get(Calendar.SECOND) > 9 ? "" + calendario.get(Calendar.SECOND) : "0" + calendario.get(Calendar.SECOND);
     }
 
+    public void settamanioBloques(int cantbloque) {
+        /* if (cantbloque == 0) {
+            JOptionPane.showMessageDialog(null, "No tiene tamaño");
+        } else*/ if (cantbloque > 16) {
+            JOptionPane.showMessageDialog(null, "Supera nuestra capacidad para almacenar");
+        } else {
+            this.tamañobloque = (int) Math.pow(2, cantbloque) - 1;
+            System.out.println("Capacidad" + tamañobloque);
+        }
+    }
+
     public class verificarProcesos extends Thread {//sirve para ver si se dibuja o no 
 
         DefaultTableModel tables = new DefaultTableModel();
@@ -526,16 +575,68 @@ public class principal extends javax.swing.JFrame implements Runnable {
             while (true) {
                 System.out.println("toca insertar?" + insertar);
                 System.out.println(Procesos.size());
-
                 if (insertar == 1) {//hay procesos que meter en nuestro sistema
+                    String tamaño;
+                    String[] datos = new String[4];
+                    //int bloque = Procesos.get(contadorDeListaProcesos).getBloques();
+                    //System.out.println("bloque" + bloque);
+                    int bloqueAnterior = tablita.getRowCount();
                     if (Procesos.get(contadorDeListaProcesos).getBloques() != 0) {
                         System.out.println("Dibujar");
+                        if (Procesos.get(contadorDeListaProcesos).getBloques() == 1) {
+                            if (bloqueAnterior > 0) {
+                                System.out.println("simon");
+                                System.out.println(bloque);
+                                System.out.println("bloqueAnterior****" + bloqueAnterior);
+
+                                settamanioBloques(bloqueAnterior+1);
+                                tamaño = Hexadecimales(tamañobloque);
+                            } else {
+                                System.out.println("también");
+                                settamanioBloques(bloque);
+                                tamaño = Hexadecimales(tamañobloque);
+                            }
+                            datos[0] = tamaño;
+                        } else if (Procesos.get(contadorDeListaProcesos).getBloques() == bloque) {
+                            System.out.println("si entra");
+                            if (bloqueAnterior/*Ve  las filas totales ocupadas*/ > 0) {
+                                settamanioBloques(1 + bloqueAnterior);// bloque disponible
+                                tamaño = Hexadecimales(tamañobloque);
+                                System.out.println("bloqueAnterior----" + bloqueAnterior);
+                                System.out.println("TAMAÑO" + tamañobloque);
+                                System.out.println("tamañoooo" + tamaño);
+                                System.out.println("HAY BLOQUE ANTERIOR");
+                            } else {
+                                System.out.println("kpex");
+                                settamanioBloques(0);
+                                tamaño = Hexadecimales(tamañobloque);
+                                System.out.println("tamaño" + tamañobloque);
+                                System.out.println("NO HAY ");
+                            }
+                            datos[0] = tamaño;
+                        }
                         //System.out.println(Procesos.get(0).getBloques());
-                        String[] datos = new String[4];//4 datos posibles necesitamos
-                        datos[0] = " ";
+                        //1 ultimo bloque 
+                        //getBloque total de bloques 
+                        //posB pos final 1-6
+                        //posA inicial 
+                        //4 datos posibles necesitamos
+                        //datos[0] = " ";
                         datos[1] = " ";
                         datos[2] = " ";
                         datos[3] = " ";
+                        /*int suma= Procesos.get(contadorDeListaProcesos).getBloques() + bloqueAnterior;
+                        if (Procesos.get(contadorDeListaProcesos).getBloques() + bloqueAnterior == posF + 1) {
+                            datos[0] = "fin";
+                            System.out.println("bloque Ant"+bloqueAnterior);
+                            System.out.println("Aqui"+Procesos.get(contadorDeListaProcesos).getBloques());
+                            System.out.println("suma "+ suma);
+                        }
+                        if (Procesos.get(contadorDeListaProcesos).getBloques() + bloqueAnterior == posI + 1) {
+                            datos[0] = "inicio";
+                            
+                        }*/
+
                         tables.addRow(datos);
                         Procesos.get(contadorDeListaProcesos).setBloques(Procesos.get(contadorDeListaProcesos).getBloques() - 1);
                     } else {
