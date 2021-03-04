@@ -493,7 +493,7 @@ public class principal extends javax.swing.JFrame implements Runnable {
 //            System.out.println("tam "+ randInt+ " nombre " + process.getNombre()+" tiempollegada "+tiempo_llegada+" duracion "+ duracion2);
             //Se agreaga a la lista circular
             int duracion_limite = (int) (Math.random() * (16 - 5)) + 5;
-            insertar(process.getNombre(), randInt, tiempo_llegada, duracion_limite);
+            insertar(process.getNombre(), process.getBloques(), tiempo_llegada, duracion_limite);
             System.out.println("agregando datos ......................");
             jLabel5.setText(String.valueOf(randInt));
             bloques.setText(String.valueOf(process.getBloques()));
