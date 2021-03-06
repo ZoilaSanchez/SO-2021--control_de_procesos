@@ -26,6 +26,7 @@ public class principal extends javax.swing.JFrame implements Runnable {
     // proceso para crear una lista
     int bloque = 0;
     int posI = 0, posF = 0, tamañobloque;
+    int Dire=0;
     ArrayList<Nodo> lista;
     int tamaño_lista;
     String hora, minutos, segundos, ampm;
@@ -59,6 +60,7 @@ public class principal extends javax.swing.JFrame implements Runnable {
         verificarProcesos hilo = new verificarProcesos();
         hilo.start();
     }
+    
 
     public String Hexadecimales(int decimal) {
         Scanner teclado = new Scanner(System.in);
@@ -97,8 +99,6 @@ public class principal extends javax.swing.JFrame implements Runnable {
         agregar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         bloques = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        DirH = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         lblReloj = new javax.swing.JLabel();
@@ -121,14 +121,14 @@ public class principal extends javax.swing.JFrame implements Runnable {
 
             },
             new String [] {
-                "Tamaño", "No.", "Documento", "Estado"
+                "Direccion", "Tamaño", "Instruccion", "Estado"
             }
         ) {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.Byte.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                true, false, false, false
+                true, true, true, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -155,11 +155,6 @@ public class principal extends javax.swing.JFrame implements Runnable {
         });
 
         jLabel2.setText("Agregar proceso");
-
-        jLabel3.setText("Direccion de Memoria:");
-
-        DirH.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        DirH.setText("0");
 
         jLabel4.setText("Direccion de memoria ejecutandose: ");
 
@@ -217,23 +212,9 @@ public class principal extends javax.swing.JFrame implements Runnable {
                                 .addComponent(lblReloj)
                                 .addGap(227, 227, 227))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(130, 130, 130))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(6, 6, 6)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel3)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(DirH))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel4)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jLabel5)))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(130, 130, 130)
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(36, 36, 36)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -243,52 +224,53 @@ public class principal extends javax.swing.JFrame implements Runnable {
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(113, 113, 113)
                                 .addComponent(agregar)))
-                        .addContainerGap(309, Short.MAX_VALUE))
+                        .addContainerGap(332, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(243, 243, 243)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 549, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(366, Short.MAX_VALUE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(243, 243, 243)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 549, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel5)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(44, 44, 44)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(agregar)
-                                .addGap(70, 70, 70)
-                                .addComponent(bloques, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(27, 27, 27)
-                                .addComponent(lblReloj))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(118, 118, 118)
-                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(108, 108, 108))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jButton1))
-                                        .addGap(131, 131, 131))))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(161, 161, 161)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addContainerGap(119, Short.MAX_VALUE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGap(138, 138, 138)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel3)
-                                .addComponent(DirH))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(color, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(3, 3, 3)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButton1))
+                            .addContainerGap(142, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addComponent(agregar)
+                        .addGap(70, 70, 70)
+                        .addComponent(bloques, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(lblReloj))))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel4)
+                        .addComponent(jLabel5))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(color, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(3, 3, 3)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -472,10 +454,6 @@ public class principal extends javax.swing.JFrame implements Runnable {
                     }
                     if (contador == guiaParaAsignarEspacios - 1) {
                         PosB = i;
-                        //Direccion en decimales 2^n-1
-                        double Dir = (int) Math.pow(2, PosB);
-                        int Total = (int) (Dir - 1);
-                        DirH.setText(String.valueOf(Total));
                         System.out.println("La posicion final es " + PosB);
                     }
                     procesosTabla[i] = true;//esto significa que esos espacios de la memoria estan llenos
@@ -504,12 +482,18 @@ public class principal extends javax.swing.JFrame implements Runnable {
             posF = PosB;
             System.out.println("posI" + posI);
             System.out.println("posF" + posF);
+            
+            
         } else {
             JOptionPane.showMessageDialog(null, "Memoria llena, el proceso ocupaba " + guiaParaAsignarEspacios);
         }
-
+        //agregar.setEnabled(false);
+//        DireccionI hilo = new DireccionI();
+//        hilo.start();
     }//GEN-LAST:event_agregarActionPerformed
-
+    public void Revibir(){
+        
+    }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         agregar.setEnabled(false);
         mihilo hilo = new mihilo();
@@ -552,11 +536,28 @@ public class principal extends javax.swing.JFrame implements Runnable {
         /* if (cantbloque == 0) {
             JOptionPane.showMessageDialog(null, "No tiene tamaño");
         } else*/ if (cantbloque > 16) {
-            JOptionPane.showMessageDialog(null, "Supera nuestra capacidad para almacenar");
+            JOptionPane.showMessageDialog(null, "Supera nuestra capaci dad para almacenar");
         } else {
             this.tamañobloque = (int) Math.pow(2, cantbloque) - 1;
             System.out.println("Capacidad" + tamañobloque);
         }
+    }
+    //funcion para obtener la direccion 
+    public String ObtenerInstruccion(int posi){
+        ArrayList<String> binario = new ArrayList<String>();
+        int resto;
+        String binarioString = "";
+        do{
+            resto = posi%2;
+            posi = posi/2;
+            binario.add(0, Integer.toString(resto));
+        }while(posi > 2); 
+        binario.add(0, Integer.toString(posi));
+        for(int i = 0; i < binario.size(); i++){
+            binarioString += binario.get(i);
+            System.out.println("");
+        }
+        return binarioString;
     }
 
     public class verificarProcesos extends Thread {//sirve para ver si se dibuja o no 
@@ -564,10 +565,10 @@ public class principal extends javax.swing.JFrame implements Runnable {
         DefaultTableModel tables = new DefaultTableModel();
 
         public verificarProcesos() {
-            tables.addColumn("Tam");
-            tables.addColumn("No.");
-            tables.addColumn("Documento");
-            tables.addColumn("Estado");
+            tables.addColumn("Direccion");
+            tables.addColumn("Tamaño");
+            tables.addColumn("Istruccion");
+            tables.addColumn("Est");
         }
 
         @Override
@@ -577,6 +578,8 @@ public class principal extends javax.swing.JFrame implements Runnable {
                 System.out.println(Procesos.size());
                 if (insertar == 1) {//hay procesos que meter en nuestro sistema
                     String tamaño;
+                    int Direccion;
+                    String instruccion;
                     String[] datos = new String[4];
                     //int bloque = Procesos.get(contadorDeListaProcesos).getBloques();
                     //System.out.println("bloque" + bloque);
@@ -591,17 +594,26 @@ public class principal extends javax.swing.JFrame implements Runnable {
 
                                 settamanioBloques(bloqueAnterior+1);
                                 tamaño = Hexadecimales(tamañobloque);
+                                instruccion = ObtenerInstruccion(posF);
+//                                Direccion= setDireccion(posI);
                             } else {
                                 System.out.println("también");
                                 settamanioBloques(bloque);
                                 tamaño = Hexadecimales(tamañobloque);
+                                instruccion = ObtenerInstruccion(posF);
+//                                Direccion= setDireccion(posI);
                             }
-                            datos[0] = tamaño;
+                            datos[0] = String.valueOf(posF);
+                            datos[1] = tamaño;
+                            datos[2] = instruccion;
+                            
                         } else if (Procesos.get(contadorDeListaProcesos).getBloques() == bloque) {
                             System.out.println("si entra");
                             if (bloqueAnterior/*Ve  las filas totales ocupadas*/ > 0) {
                                 settamanioBloques(1 + bloqueAnterior);// bloque disponible
                                 tamaño = Hexadecimales(tamañobloque);
+                                instruccion = ObtenerInstruccion(posI);
+//                                Direccion= setDireccion(posI);
                                 System.out.println("bloqueAnterior----" + bloqueAnterior);
                                 System.out.println("TAMAÑO" + tamañobloque);
                                 System.out.println("tamañoooo" + tamaño);
@@ -610,10 +622,16 @@ public class principal extends javax.swing.JFrame implements Runnable {
                                 System.out.println("kpex");
                                 settamanioBloques(0);
                                 tamaño = Hexadecimales(tamañobloque);
+                                instruccion = ObtenerInstruccion(posI);
+//                                Direccion= setDireccion(posI);
                                 System.out.println("tamaño" + tamañobloque);
                                 System.out.println("NO HAY ");
                             }
-                            datos[0] = tamaño;
+                            datos[0] = String.valueOf(posI);
+                            datos[1] = tamaño;
+                            datos[2] = instruccion;
+                        }else if (Procesos.get(contadorDeListaProcesos).getBloques() <= bloque){
+                            
                         }
                         //System.out.println(Procesos.get(0).getBloques());
                         //1 ultimo bloque 
@@ -622,9 +640,9 @@ public class principal extends javax.swing.JFrame implements Runnable {
                         //posA inicial 
                         //4 datos posibles necesitamos
                         //datos[0] = " ";
-                        datos[1] = " ";
-                        datos[2] = " ";
+//                        datos[0] = " ";
                         datos[3] = " ";
+                        
                         /*int suma= Procesos.get(contadorDeListaProcesos).getBloques() + bloqueAnterior;
                         if (Procesos.get(contadorDeListaProcesos).getBloques() + bloqueAnterior == posF + 1) {
                             datos[0] = "fin";
@@ -641,6 +659,7 @@ public class principal extends javax.swing.JFrame implements Runnable {
                         Procesos.get(contadorDeListaProcesos).setBloques(Procesos.get(contadorDeListaProcesos).getBloques() - 1);
                     } else {
                         insertar = 0;//dejo de insertar
+                        
                     }
                     tablita.setModel(tables);
 
@@ -654,7 +673,24 @@ public class principal extends javax.swing.JFrame implements Runnable {
         }
 
     }
-
+//    public class DireccionI extends Thread {
+//        int contador = 0;
+//        
+//        @Override
+//        public void run(){
+//            //si la memoria es de 16 bits
+//            while(contador<16){
+//                contador++;
+////                Dir.setText(String.valueOf(contador));
+//                System.out.println("Conador de Direccion: "+contador);
+//                try {
+//                   Thread.sleep(1000);
+//            } catch (InterruptedException ex) {
+//                Logger.getLogger(ObtenerDireccion.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            }
+//        }
+//    }
     //pasar la direccion a Hexadecimal
     public String DireccionHexadecimal(int decimal) {
         Scanner teclado = new Scanner(System.in);
@@ -706,7 +742,6 @@ public class principal extends javax.swing.JFrame implements Runnable {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel DirH;
     private javax.swing.JButton agregar;
     private javax.swing.JLabel as;
     private javax.swing.JLabel bloques;
@@ -714,7 +749,6 @@ public class principal extends javax.swing.JFrame implements Runnable {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
