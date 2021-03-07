@@ -26,7 +26,7 @@ public class principal extends javax.swing.JFrame implements Runnable {
     // proceso para crear una lista
     int bloque = 0;
     int posI = 0, posF = 0, tamañobloque;
-    int Dire=0;
+    int Dire = 0;
     ArrayList<Nodo> lista;
     int tamaño_lista;
     String hora, minutos, segundos, ampm;
@@ -60,9 +60,7 @@ public class principal extends javax.swing.JFrame implements Runnable {
     public void mostrardatos() {
         verificarProcesos hilo = new verificarProcesos();
         hilo.start();
-
     }
-    
 
     public String Hexadecimales(int decimal) {
         Scanner teclado = new Scanner(System.in);
@@ -107,6 +105,8 @@ public class principal extends javax.swing.JFrame implements Runnable {
         mitablita = new javax.swing.JTable();
         color = new javax.swing.JPanel();
         as = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txttemp = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -187,7 +187,7 @@ public class principal extends javax.swing.JFrame implements Runnable {
         color.setLayout(colorLayout);
         colorLayout.setHorizontalGroup(
             colorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(as, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(as, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
         );
         colorLayout.setVerticalGroup(
             colorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,6 +198,12 @@ public class principal extends javax.swing.JFrame implements Runnable {
         );
 
         getContentPane().add(color, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 260, 60));
+
+        txttemp.setColumns(20);
+        txttemp.setRows(5);
+        jScrollPane3.setViewportView(txttemp);
+
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, 250, 160));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -224,6 +230,8 @@ public class principal extends javax.swing.JFrame implements Runnable {
                             if (i == 0) {
                                 try {
                                     mitablita.setValueAt("Termindo", posiproceso, 5);
+                                    histo += "Terminado  " + listado.getNombre() + " - " + listado.getTamanio() + "-" + listado.getTiempo_llegada() + "-" + listado.getDuracion() + "\n";
+                                    txttemp.setText(histo);
                                     color.setBackground(Color.RED);
                                     as.setText(listado.getNombre());
                                     mitablita.setValueAt(0, posiproceso, 4);
@@ -235,6 +243,8 @@ public class principal extends javax.swing.JFrame implements Runnable {
                                 try {
                                     System.out.println("Ejecutando......" + i);
 //                                    pruebas.setText(listado.getDuracion() + "Ejecutando1........ " + i);
+                                    histo += "Ejecutando  " + listado.getNombre() + " - " + listado.getTamanio() + "-" + listado.getTiempo_llegada() + "-" + listado.getDuracion() + "\n";
+                                    txttemp.setText(histo);
                                     color.setBackground(Color.GREEN);
                                     as.setText(listado.getNombre());
                                     System.out.println(posiproceso + " prestar atecion aquiiiiiiiiiiiiiiiiiiiiiii");
@@ -246,6 +256,9 @@ public class principal extends javax.swing.JFrame implements Runnable {
                                 }
                             }
                         }
+
+                        histo += "Borrando  " + listado.getNombre() + " - " + listado.getTamanio() + "-" + listado.getTiempo_llegada() + "-" + listado.getDuracion() + "\n";
+                        txttemp.setText(histo);
                         itrNodo.remove();
                         tamaño_lista--;
                     } else if (listado.getDuracion() > 10) {
@@ -260,6 +273,8 @@ public class principal extends javax.swing.JFrame implements Runnable {
                                 System.out.println(posiproceso + " prestar atecion aquiiiiiiiiiiiiiiiiiiiiiii");
                                 mitablita.setValueAt(i, posiproceso, 4);
                                 mitablita.setValueAt("Ejecutando.... ", posiproceso, 5);
+                                histo += "Ejecutando  " + listado.getNombre() + " - " + listado.getTamanio() + "-" + listado.getTiempo_llegada() + "-" + listado.getDuracion() + "\n";
+                                txttemp.setText(histo);
                                 Thread.sleep(100);
                             } catch (InterruptedException ex) {
                                 Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);
@@ -270,6 +285,8 @@ public class principal extends javax.swing.JFrame implements Runnable {
 //                        pruebas.setText("Listo........ ");
                         color.setBackground(Color.YELLOW);
                         as.setText(listado.getNombre());
+                        histo+="Listo  "+listado.getNombre()+" - "+ listado.getTamanio()+"-"+listado.getTiempo_llegada()+"-"+ listado.getDuracion()+"\n";
+                        txttemp.setText(histo);
                         mitablita.setValueAt("Listo ... ", posiproceso, 5);
                         listado.setDuracion(duracio);
                     }
@@ -294,10 +311,9 @@ public class principal extends javax.swing.JFrame implements Runnable {
                 modelo2.removeRow(0);
             }
             boolean[] x = {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false};
-            procesosTabla=x;
+            procesosTabla = x;
             jLabel5.setText("");
-            
-            
+
         }
     }
 
@@ -357,10 +373,11 @@ public class principal extends javax.swing.JFrame implements Runnable {
         return x;
     }
 
-boolean estadobont=true;
+    String histo = "";
+    boolean estadobont = true;
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
-       agregar.setEnabled(false);
-       correr.setEnabled(false);
+        agregar.setEnabled(false);
+        correr.setEnabled(false);
         Random rand = new Random();
         tiempo_llegada = Integer.parseInt(segundos);
         int randInt = rand.nextInt(63); //Genera numeros de 0 a 65535 que es nuestro espacio disponible
@@ -402,6 +419,8 @@ boolean estadobont=true;
             //Se agreaga a la lista circular
             int duracion_limite = (int) (Math.random() * (16 - 5)) + 5;
             insertar(process.getNombre(), process.getBloques(), tiempo_llegada, duracion_limite);
+            histo += "Creando  " + process.getNombre() + "--" + process.getBloques() + "--" + tiempo_llegada + "--" + duracion_limite + "\n";
+            txttemp.setText(histo);
             System.out.println("agregando datos ......................");
             jLabel5.setText(String.valueOf(randInt));
 //            bloques.setText(String.valueOf(process.getBloques()));
@@ -412,8 +431,7 @@ boolean estadobont=true;
             posF = PosB;
             System.out.println("posI" + posI);
             System.out.println("posF" + posF);
-            
-            
+
         } else {
             JOptionPane.showMessageDialog(null, "Memoria llena, el proceso ocupaba " + guiaParaAsignarEspacios);
             correr.setEnabled(true);
@@ -422,10 +440,10 @@ boolean estadobont=true;
         //agregar.setEnabled(false);
 //        DireccionI hilo = new DireccionI();
 //        hilo.start();
-      
+
     }//GEN-LAST:event_agregarActionPerformed
-    public void Revibir(){
-        
+    public void Revibir() {
+
     }
     private void correrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_correrActionPerformed
         agregar.setEnabled(false);
@@ -476,18 +494,19 @@ boolean estadobont=true;
             System.out.println("Capacidad" + tamañobloque);
         }
     }
+
     //funcion para obtener la direccion 
-    public String ObtenerInstruccion(int posi){
+    public String ObtenerInstruccion(int posi) {
         ArrayList<String> binario = new ArrayList<String>();
         int resto;
         String binarioString = "";
-        do{
-            resto = posi%2;
-            posi = posi/2;
+        do {
+            resto = posi % 2;
+            posi = posi / 2;
             binario.add(0, Integer.toString(resto));
-        }while(posi > 2); 
+        } while (posi > 2);
         binario.add(0, Integer.toString(posi));
-        for(int i = 0; i < binario.size(); i++){
+        for (int i = 0; i < binario.size(); i++) {
             binarioString += binario.get(i);
             System.out.println("");
         }
@@ -525,7 +544,7 @@ boolean estadobont=true;
                                 System.out.println(bloque);
                                 System.out.println("bloqueAnterior****" + bloqueAnterior);
 
-                                settamanioBloques(bloqueAnterior+1);
+                                settamanioBloques(bloqueAnterior + 1);
                                 tamaño = Hexadecimales(tamañobloque);
                                 instruccion = ObtenerInstruccion(posF);
 //                                Direccion= setDireccion(posI);
@@ -539,7 +558,7 @@ boolean estadobont=true;
                             datos[0] = String.valueOf(posF);
                             datos[1] = tamaño;
                             datos[2] = instruccion;
-                            
+
                         } else if (Procesos.get(contadorDeListaProcesos).getBloques() == bloque) {
                             System.out.println("si entra");
                             if (bloqueAnterior/*Ve  las filas totales ocupadas*/ > 0) {
@@ -563,8 +582,8 @@ boolean estadobont=true;
                             datos[0] = String.valueOf(posI);
                             datos[1] = tamaño;
                             datos[2] = instruccion;
-                        }else if (Procesos.get(contadorDeListaProcesos).getBloques() <= bloque){
-                            
+                        } else if (Procesos.get(contadorDeListaProcesos).getBloques() <= bloque) {
+
                         }
                         //System.out.println(Procesos.get(0).getBloques());
                         //1 ultimo bloque 
@@ -575,7 +594,7 @@ boolean estadobont=true;
                         //datos[0] = " ";
 //                        datos[0] = " ";
                         datos[3] = " ";
-                        
+
                         /*int suma= Procesos.get(contadorDeListaProcesos).getBloques() + bloqueAnterior;
                         if (Procesos.get(contadorDeListaProcesos).getBloques() + bloqueAnterior == posF + 1) {
                             datos[0] = "fin";
@@ -587,12 +606,11 @@ boolean estadobont=true;
                             datos[0] = "inicio";
                             
                         }*/
-
                         tables.addRow(datos);
                         Procesos.get(contadorDeListaProcesos).setBloques(Procesos.get(contadorDeListaProcesos).getBloques() - 1);
                     } else {
                         insertar = 0;//dejo de insertar
-                        
+
                         agregar.setEnabled(true);
                         correr.setEnabled(true);
 
@@ -606,10 +624,8 @@ boolean estadobont=true;
                     System.out.println("Error en el hilo de dibujo");
                 }
             }
-            
+
         }
-        
-          
 
     }
 //    public class DireccionI extends Thread {
@@ -631,6 +647,7 @@ boolean estadobont=true;
 //        }
 //    }
     //pasar la direccion a Hexadecimal
+
     public String DireccionHexadecimal(int decimal) {
         Scanner teclado = new Scanner(System.in);
         teclado.close();
@@ -690,8 +707,10 @@ boolean estadobont=true;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblReloj;
     private javax.swing.JTable mitablita;
     private javax.swing.JTable tablita;
+    private javax.swing.JTextArea txttemp;
     // End of variables declaration//GEN-END:variables
 }
