@@ -157,7 +157,7 @@ public class principal extends javax.swing.JFrame implements Runnable {
             }
         };
         tablita.setBorder(javax.swing.BorderFactory.createCompoundBorder());
-        tablita.setFont(new java.awt.Font("DialogInput", 1, 16)); // NOI18N
+        tablita.setFont(new java.awt.Font("DialogInput", 1, 12)); // NOI18N
         tablita.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -199,13 +199,11 @@ public class principal extends javax.swing.JFrame implements Runnable {
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 280, 160, -1));
 
         jLabel5.setFont(new java.awt.Font("DialogInput", 1, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("D");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 270, 60, 50));
 
         lblReloj.setFont(new java.awt.Font("DialogInput", 1, 18)); // NOI18N
-        lblReloj.setForeground(new java.awt.Color(0, 0, 0));
         lblReloj.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblReloj.setText("HORA");
         getContentPane().add(lblReloj, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 350, 250, -1));
@@ -239,7 +237,6 @@ public class principal extends javax.swing.JFrame implements Runnable {
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 830, 170));
 
         as.setFont(new java.awt.Font("DialogInput", 1, 36)); // NOI18N
-        as.setForeground(new java.awt.Color(0, 0, 0));
         as.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout colorLayout = new javax.swing.GroupLayout(color);
