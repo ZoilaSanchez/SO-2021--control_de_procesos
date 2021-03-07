@@ -1,3 +1,5 @@
+package paquete_principal;
+
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.table.*;
