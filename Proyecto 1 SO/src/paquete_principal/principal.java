@@ -53,12 +53,14 @@ public class principal extends javax.swing.JFrame implements Runnable {
         h1.start();
         tamaño_lista = 0;
         lista = new ArrayList<Nodo>();
+        correr.setEnabled(false);
 
     }
 
     public void mostrardatos() {
         verificarProcesos hilo = new verificarProcesos();
         hilo.start();
+
     }
     
 
@@ -97,18 +99,17 @@ public class principal extends javax.swing.JFrame implements Runnable {
         tablita = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         agregar = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        bloques = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         lblReloj = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        correr = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         mitablita = new javax.swing.JTable();
         color = new javax.swing.JPanel();
         as = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tablita = new javax.swing.JTable(){
             public boolean isCellEditable(int ro,int col ){
@@ -121,22 +122,15 @@ public class principal extends javax.swing.JFrame implements Runnable {
 
             },
             new String [] {
-                "Direccion", "Tamaño", "Instruccion", "Estado"
+                "Direccion", "Tamaño", "Instruccion"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Byte.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                true, true, true, false
+                java.lang.String.class, java.lang.String.class, java.lang.Byte.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
             }
         });
         tablita.setFocusable(false);
@@ -145,7 +139,10 @@ public class principal extends javax.swing.JFrame implements Runnable {
         tablita.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tablita);
 
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 260, 287));
+
         jLabel1.setText("Bloques a ocupar del proceso");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 382, 221, 45));
 
         agregar.setText("agregar");
         agregar.addActionListener(new java.awt.event.ActionListener() {
@@ -153,21 +150,24 @@ public class principal extends javax.swing.JFrame implements Runnable {
                 agregarActionPerformed(evt);
             }
         });
-
-        jLabel2.setText("Agregar proceso");
+        getContentPane().add(agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1038, 367, -1, -1));
 
         jLabel4.setText("Direccion de memoria ejecutandose: ");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(303, 336, -1, -1));
 
         jLabel5.setText("D");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(525, 336, -1, -1));
 
         lblReloj.setText("HORA");
+        getContentPane().add(lblReloj, new org.netbeans.lib.awtextra.AbsoluteConstraints(475, 530, -1, -1));
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        correr.setText("jButton1");
+        correr.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                correrActionPerformed(evt);
             }
         });
+        getContentPane().add(correr, new org.netbeans.lib.awtextra.AbsoluteConstraints(848, 365, 77, -1));
 
         mitablita.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -179,100 +179,25 @@ public class principal extends javax.swing.JFrame implements Runnable {
         ));
         jScrollPane2.setViewportView(mitablita);
 
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(534, 44, 549, 177));
+
         as.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout colorLayout = new javax.swing.GroupLayout(color);
         color.setLayout(colorLayout);
         colorLayout.setHorizontalGroup(
             colorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(as, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+            .addComponent(as, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         colorLayout.setVerticalGroup(
             colorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, colorLayout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
+            .addGroup(colorLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
                 .addComponent(as, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(color, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(184, 184, 184)
-                                .addComponent(lblReloj)
-                                .addGap(227, 227, 227))
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(130, 130, 130)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(36, 36, 36)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(bloques, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(21, 21, 21)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(113, 113, 113)
-                                .addComponent(agregar)))
-                        .addContainerGap(332, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(243, 243, 243)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 549, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel5)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(161, 161, 161)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addContainerGap(119, Short.MAX_VALUE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addGap(138, 138, 138)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jButton1))
-                            .addContainerGap(142, Short.MAX_VALUE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addComponent(agregar)
-                        .addGap(70, 70, 70)
-                        .addComponent(bloques, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
-                        .addComponent(lblReloj))))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel4)
-                        .addComponent(jLabel5))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(color, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(3, 3, 3)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        getContentPane().add(color, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 260, 60));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -370,6 +295,9 @@ public class principal extends javax.swing.JFrame implements Runnable {
             }
             boolean[] x = {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false};
             procesosTabla=x;
+            jLabel5.setText("");
+            
+            
         }
     }
 
@@ -429,12 +357,14 @@ public class principal extends javax.swing.JFrame implements Runnable {
         return x;
     }
 
-
+boolean estadobont=true;
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
+       agregar.setEnabled(false);
+       correr.setEnabled(false);
         Random rand = new Random();
         tiempo_llegada = Integer.parseInt(segundos);
         int randInt = rand.nextInt(63); //Genera numeros de 0 a 65535 que es nuestro espacio disponible
-        bloques.setText("");
+//        bloques.setText("");
         Procesos procesoAux = new Procesos("aux", 0, 0, 0, 0);//ignorarlo solo lo uso para usar una funcion
         int guiaParaAsignarEspacios = procesoAux.saberBloquesAUtilizar(randInt);//me indica cuantos bloques de memoria debo buscar
         bloque = guiaParaAsignarEspacios;
@@ -474,7 +404,7 @@ public class principal extends javax.swing.JFrame implements Runnable {
             insertar(process.getNombre(), process.getBloques(), tiempo_llegada, duracion_limite);
             System.out.println("agregando datos ......................");
             jLabel5.setText(String.valueOf(randInt));
-            bloques.setText(String.valueOf(process.getBloques()));
+//            bloques.setText(String.valueOf(process.getBloques()));
             Procesos.add(process);//voy añadiendo los procesos conforme le van dando click
             insertar++;
             contadorDeListaProcesos++;//aqui podriamos cambiar y mandarle otro numero
@@ -486,19 +416,23 @@ public class principal extends javax.swing.JFrame implements Runnable {
             
         } else {
             JOptionPane.showMessageDialog(null, "Memoria llena, el proceso ocupaba " + guiaParaAsignarEspacios);
+            correr.setEnabled(true);
+            agregar.setEnabled(true);
         }
         //agregar.setEnabled(false);
 //        DireccionI hilo = new DireccionI();
 //        hilo.start();
+      
     }//GEN-LAST:event_agregarActionPerformed
     public void Revibir(){
         
     }
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void correrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_correrActionPerformed
         agregar.setEnabled(false);
         mihilo hilo = new mihilo();
         hilo.start();
-    }//GEN-LAST:event_jButton1ActionPerformed
+
+    }//GEN-LAST:event_correrActionPerformed
 
     @Override
     public void run() {
@@ -567,8 +501,7 @@ public class principal extends javax.swing.JFrame implements Runnable {
         public verificarProcesos() {
             tables.addColumn("Direccion");
             tables.addColumn("Tamaño");
-            tables.addColumn("Istruccion");
-            tables.addColumn("Est");
+            tables.addColumn("Instruccion");
         }
 
         @Override
@@ -660,6 +593,9 @@ public class principal extends javax.swing.JFrame implements Runnable {
                     } else {
                         insertar = 0;//dejo de insertar
                         
+                        agregar.setEnabled(true);
+                        correr.setEnabled(true);
+
                     }
                     tablita.setModel(tables);
 
@@ -670,7 +606,10 @@ public class principal extends javax.swing.JFrame implements Runnable {
                     System.out.println("Error en el hilo de dibujo");
                 }
             }
+            
         }
+        
+          
 
     }
 //    public class DireccionI extends Thread {
@@ -744,11 +683,9 @@ public class principal extends javax.swing.JFrame implements Runnable {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton agregar;
     private javax.swing.JLabel as;
-    private javax.swing.JLabel bloques;
     private javax.swing.JPanel color;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton correr;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
