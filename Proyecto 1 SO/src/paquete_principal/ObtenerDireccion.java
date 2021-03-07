@@ -25,9 +25,9 @@ public class ObtenerDireccion {
         
         @Override
         public void run(){
-            //si la memoria es de 64 bits cambiar de ^2 a ^4
-            while(contador<32){
-                contador+=contador^2;
+            while(contador<16){
+                listaD.existe(contador);
+                contador+=contador;
 //                Dir.setText(String.valueOf(contador));
                 System.out.println("Conador: "+contador);
                 try {

@@ -593,22 +593,19 @@ public class principal extends javax.swing.JFrame implements Runnable {
         }
     }
 
-    //funcion para obtener la direccion 
+    //funcion para obtener la direccion 2^n-1
     public String ObtenerInstruccion(int posi) {
-        ArrayList<String> binario = new ArrayList<String>();
-        int resto;
-        String binarioString = "";
-        do {
-            resto = posi % 2;
-            posi = posi / 2;
-            binario.add(0, Integer.toString(resto));
-        } while (posi > 2);
-        binario.add(0, Integer.toString(posi));
-        for (int i = 0; i < binario.size(); i++) {
-            binarioString += binario.get(i);
-            System.out.println("");
+        int operacion;
+        int resta;
+        String instruccion;
+        if(posi<=0){
+            instruccion="0000";
+        }else{
+        operacion = (int) Math.pow(posi, 2);
+        resta = operacion -1;
+        instruccion = Integer.toBinaryString(resta);
         }
-        return binarioString;
+        return instruccion;
     }
 
     public class verificarProcesos extends Thread {//sirve para ver si se dibuja o no 
@@ -645,8 +642,9 @@ public class principal extends javax.swing.JFrame implements Runnable {
 
                                 settamanioBloques(bloqueAnterior + 1);
                                 tamaño = Hexadecimales(tamañobloque);
+                                
                                 instruccion = ObtenerInstruccion(posF);
-
+                                
                             } else {
                                 System.out.println("también");
                                 settamanioBloques(bloque);
