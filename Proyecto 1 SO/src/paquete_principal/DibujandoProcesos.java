@@ -74,21 +74,6 @@ public class DibujandoProcesos{
               }
            };
            
-           
-           
-//            table.setModel(modelo);
-//            String[] datos = new String[4];//4 datos posibles necesitamos
-//            datos[0] = "2";
-//            datos[1] = "3";
-//            datos[2] = "4";
-//            datos[3] = "5";
-//            modelo.addRow(datos);
-//            datos[0] = "2";
-//            datos[1] = "3";
-//            datos[2] = "4";
-//            datos[3] = "5";
-//            modelo.addRow(datos);
-            
            add(new JScrollPane(table));
            setSize(400, 300);
            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -96,16 +81,4 @@ public class DibujandoProcesos{
            setVisible(true);
        }
     }
-//        @Override
-//        public void run(){     
-//            while(cont <= 100){
-//                System.out.println("prueba");
-//                cont++;
-//                try {
-//                    Thread.sleep(1000);
-//                } catch (InterruptedException ex) {
-//                  System.out.println("Error en el hilo de dibujo");
-//                }
-//            }
-//        }
 }

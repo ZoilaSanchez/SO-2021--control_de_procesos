@@ -211,18 +211,6 @@ public class HiloTamanio extends Thread {
                 }
 
             }
-            /* if (bloque == 4) {
-                datos[2]="paso4";
-                modelo.insertRow(linea, datos);
-                System.out.println("cuatro");
-                try {
-                    sleep(5000);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(Hilo.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                //activo=false;//sin esto esta infinito el hilo
-                //c = 3;
-            }*/
         }
     }
 

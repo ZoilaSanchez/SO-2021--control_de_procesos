@@ -15,6 +15,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import listacircular.Nodo;
 
 /**
@@ -54,7 +56,26 @@ public class principal extends javax.swing.JFrame implements Runnable {
         tamaño_lista = 0;
         lista = new ArrayList<Nodo>();
         correr.setEnabled(false);
+        jScrollPane1.setOpaque(false);
+        jScrollPane1.getViewport().setOpaque(false);
+        mitablita.setShowGrid(false);
+        mitablita.setOpaque(false);
+        jScrollPane2.setOpaque(false);
+        jScrollPane2.getViewport().setOpaque(false);
+        tablita.setShowGrid(false);
+        tablita.setOpaque(false);
 
+        color.setOpaque(false);
+        txttemp.setOpaque(false);
+        txttemp.setBackground(new Color(0, 0, 0, 0));
+        jScrollPane3.getViewport().setBackground(new Color(0, 0, 0, 0));
+        jScrollPane3.getViewport().setOpaque(false);
+        jScrollPane3.setOpaque(false);
+        SO.setBackground(Color.ORANGE);
+        as1.setText("SISTEMA OPERATIVO");
+        this.setLocationRelativeTo(this);
+        agregar.setBackground(new Color(0, 0, 0, 0));
+        correr.setBackground(new Color(0, 0, 0, 0));
     }
 
     public void mostrardatos() {
@@ -68,8 +89,6 @@ public class principal extends javax.swing.JFrame implements Runnable {
         char digitosH[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
         String hexadecimal2 = "";
         int resto, aux = decimal;
-
-        //for (int i = decimal - 1; i >= 0; i--) {
         while (aux > 0) {
             resto = aux % 16;
             hexadecimal2 = digitosH[resto] + hexadecimal2;
@@ -77,10 +96,7 @@ public class principal extends javax.swing.JFrame implements Runnable {
         }
         System.out.printf("%n%nMétodo 2 -> Decimal: %d, Hexadecimal: %sh", decimal, hexadecimal2, "h");
         return hexadecimal2 + "h";
-        /* System.out.printf("%n%nMétodo 2 -> Decimal: %d, Hexadecimal: %s", i + 1, hexadecimal2);
-            hexadecimal2 = "";
-            aux = i;
-        }*/
+
     }
     double duracion2 = ThreadLocalRandom.current().nextInt(5, 15 + 1);//Genera numeros entre 5 y 15
 
@@ -93,6 +109,8 @@ public class principal extends javax.swing.JFrame implements Runnable {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        SO = new javax.swing.JPanel();
+        as1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablita = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
@@ -107,9 +125,31 @@ public class principal extends javax.swing.JFrame implements Runnable {
         as = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         txttemp = new javax.swing.JTextArea();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        as1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        javax.swing.GroupLayout SOLayout = new javax.swing.GroupLayout(SO);
+        SO.setLayout(SOLayout);
+        SOLayout.setHorizontalGroup(
+            SOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(as1, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+        );
+        SOLayout.setVerticalGroup(
+            SOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(SOLayout.createSequentialGroup()
+                .addComponent(as1, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 2, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(SO, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 590, 260, 20));
 
         tablita = new javax.swing.JTable(){
             public boolean isCellEditable(int ro,int col ){
@@ -117,70 +157,89 @@ public class principal extends javax.swing.JFrame implements Runnable {
             }
         };
         tablita.setBorder(javax.swing.BorderFactory.createCompoundBorder());
+        tablita.setFont(new java.awt.Font("DialogInput", 1, 16)); // NOI18N
         tablita.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Direccion", "Tamaño", "Instruccion"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Byte.class
-            };
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
             }
-        });
+        ));
         tablita.setFocusable(false);
         tablita.setGridColor(new java.awt.Color(255, 255, 255));
         tablita.getTableHeader().setResizingAllowed(false);
         tablita.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tablita);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 260, 287));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 260, 290));
 
-        jLabel1.setText("Bloques a ocupar del proceso");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 382, 221, 45));
+        jLabel1.setFont(new java.awt.Font("DialogInput", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 102));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("CONTROL DE PROCESOS --- ALGORITMO RR");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 890, 45));
 
-        agregar.setText("agregar");
+        agregar.setBackground(new java.awt.Color(102, 102, 102));
+        agregar.setFont(new java.awt.Font("DialogInput", 1, 18)); // NOI18N
+        agregar.setForeground(new java.awt.Color(255, 255, 255));
+        agregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/proceso.png"))); // NOI18N
+        agregar.setText("AGREGAR");
+        agregar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 4, true));
         agregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 agregarActionPerformed(evt);
             }
         });
-        getContentPane().add(agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1038, 367, -1, -1));
+        getContentPane().add(agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 380, 170, 90));
 
-        jLabel4.setText("Direccion de memoria ejecutandose: ");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(303, 336, -1, -1));
+        jLabel4.setFont(new java.awt.Font("DialogInput", 1, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(204, 255, 255));
+        jLabel4.setText("ejecutandose: ");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 280, 160, -1));
 
+        jLabel5.setFont(new java.awt.Font("DialogInput", 1, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("D");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(525, 336, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 270, 60, 50));
 
+        lblReloj.setFont(new java.awt.Font("DialogInput", 1, 18)); // NOI18N
+        lblReloj.setForeground(new java.awt.Color(0, 0, 0));
+        lblReloj.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblReloj.setText("HORA");
-        getContentPane().add(lblReloj, new org.netbeans.lib.awtextra.AbsoluteConstraints(475, 530, -1, -1));
+        getContentPane().add(lblReloj, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 350, 250, -1));
 
-        correr.setText("jButton1");
+        correr.setBackground(new java.awt.Color(0, 0, 0));
+        correr.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
+        correr.setForeground(new java.awt.Color(255, 255, 255));
+        correr.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ejecucion (1).png"))); // NOI18N
+        correr.setText("EJECUCION");
+        correr.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 4, true));
         correr.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 correrActionPerformed(evt);
             }
         });
-        getContentPane().add(correr, new org.netbeans.lib.awtextra.AbsoluteConstraints(848, 365, 77, -1));
+        getContentPane().add(correr, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 490, 170, 90));
 
+        mitablita.setBackground(new java.awt.Color(0, 0, 0));
+        mitablita.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
+        mitablita.setForeground(new java.awt.Color(255, 255, 255));
         mitablita.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "No", "Nombre", "Tamaño", "Tiempo L", "Duracion", "Estado"
+                "No", "Nombre", "Tamaño", "Tiempo Entrada", "Duracion", "Estado"
             }
         ));
         jScrollPane2.setViewportView(mitablita);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(534, 44, 549, 177));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 830, 170));
 
+        as.setFont(new java.awt.Font("DialogInput", 1, 36)); // NOI18N
+        as.setForeground(new java.awt.Color(0, 0, 0));
         as.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout colorLayout = new javax.swing.GroupLayout(color);
@@ -192,22 +251,55 @@ public class principal extends javax.swing.JFrame implements Runnable {
         colorLayout.setVerticalGroup(
             colorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(colorLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(as, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addGap(15, 15, 15)
+                .addComponent(as, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
-        getContentPane().add(color, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 260, 60));
+        getContentPane().add(color, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 260, 60));
 
+        txttemp.setEditable(false);
+        txttemp.setBackground(new java.awt.Color(0, 0, 0));
         txttemp.setColumns(20);
+        txttemp.setFont(new java.awt.Font("DialogInput", 1, 12)); // NOI18N
+        txttemp.setForeground(new java.awt.Color(255, 255, 255));
+        txttemp.setLineWrap(true);
         txttemp.setRows(5);
+        txttemp.setWrapStyleWord(true);
         jScrollPane3.setViewportView(txttemp);
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, 250, 160));
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 270, 290, 340));
+
+        jLabel3.setFont(new java.awt.Font("DialogInput", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(204, 255, 255));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 380, 260, 45));
+
+        jLabel6.setFont(new java.awt.Font("DialogInput", 1, 36)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(204, 255, 255));
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("HISTORIAL");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 230, 240, 45));
+
+        jLabel7.setFont(new java.awt.Font("DialogInput", 1, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(204, 255, 255));
+        jLabel7.setText("Direccion de memoria");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 260, 240, -1));
+
+        jLabel8.setFont(new java.awt.Font("DialogInput", 1, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(204, 255, 255));
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setText("Hora del sistema");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 320, 260, 45));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/low-poly-blue_a2ZpZmuUmZqaraWkpJRnamtlrWZrZWU.png"))); // NOI18N
+        jLabel2.setText("jLabel2");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 890, 650));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
     int posiproceso;
+    int t = 450;
 
     // mi clase hilo algoritmo completo
     public class mihilo extends Thread {
@@ -217,6 +309,7 @@ public class principal extends javax.swing.JFrame implements Runnable {
 
         @Override
         public void run() {
+
             while (tamaño_lista > 0) {
                 int cont = 0;
                 Iterator<Nodo> itrNodo = lista.iterator();
@@ -224,18 +317,20 @@ public class principal extends javax.swing.JFrame implements Runnable {
                     Nodo listado = itrNodo.next();
                     System.out.println("posciones de tabla " + posiciontabla);
                     if (listado.getDuracion() <= 10) {
+                        histo += "Estado: Ejecutandose  " + "Proceso: " + listado.getNombre() + "\n";
+                        txttemp.setText(histo);
                         int posiproceso = (int) (mitablita.getValueAt(listado.getPosi(), 0));
                         System.out.println("proce eliminado : " + listado.getNombre() + " cantidad " + listado.getDuracion());
                         for (int i = (int) listado.getDuracion(); i >= 0; i--) {
                             if (i == 0) {
                                 try {
                                     mitablita.setValueAt("Termindo", posiproceso, 5);
-                                    histo += "Terminado  " + listado.getNombre() + " - " + listado.getTamanio() + "-" + listado.getTiempo_llegada() + "-" + listado.getDuracion() + "\n";
+                                    histo += "Estado: Saliente  " + "Proceso: " + listado.getNombre() + "\n";
                                     txttemp.setText(histo);
-                                    color.setBackground(Color.RED);
+                                    color.setBackground(Color.GREEN);
                                     as.setText(listado.getNombre());
                                     mitablita.setValueAt(0, posiproceso, 4);
-                                    Thread.sleep(100);
+                                    Thread.sleep(t);
                                 } catch (InterruptedException ex) {
                                     Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);
                                 }
@@ -243,56 +338,55 @@ public class principal extends javax.swing.JFrame implements Runnable {
                                 try {
                                     System.out.println("Ejecutando......" + i);
 //                                    pruebas.setText(listado.getDuracion() + "Ejecutando1........ " + i);
-                                    histo += "Ejecutando  " + listado.getNombre() + " - " + listado.getTamanio() + "-" + listado.getTiempo_llegada() + "-" + listado.getDuracion() + "\n";
-                                    txttemp.setText(histo);
-                                    color.setBackground(Color.GREEN);
+
+                                    color.setBackground(Color.RED);
                                     as.setText(listado.getNombre());
                                     System.out.println(posiproceso + " prestar atecion aquiiiiiiiiiiiiiiiiiiiiiii");
                                     mitablita.setValueAt(i, posiproceso, 4);
                                     mitablita.setValueAt("Ejecutando... ", posiproceso, 5);
-                                    Thread.sleep(100);
+                                    Thread.sleep(t);
                                 } catch (InterruptedException ex) {
                                     Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);
                                 }
                             }
                         }
 
-                        histo += "Borrando  " + listado.getNombre() + " - " + listado.getTamanio() + "-" + listado.getTiempo_llegada() + "-" + listado.getDuracion() + "\n";
-                        txttemp.setText(histo);
                         itrNodo.remove();
                         tamaño_lista--;
                     } else if (listado.getDuracion() > 10) {
-                        System.out.println(listado.getDuracion() + "atencion ---------------------------------------------");
-                        int posiproceso = (int) (mitablita.getValueAt(listado.getPosi(), 0));
-//                        pruebas.setText("proce desconetar : " + listado.getNombre() + " cantidad Inicial " + listado.getDuracion());
-                        for (int i = (int) listado.getDuracion(); i > listado.getDuracion() - 10; i--) {
-                            try {
+                        try {
+                            System.out.println(listado.getDuracion() + "atencion ---------------------------------------------");
+                            histo += "Estado: Ejecutandose  " + "Proceso: " + listado.getNombre() + "\n";
+                            txttemp.setText(histo);
+                            int posiproceso = (int) (mitablita.getValueAt(listado.getPosi(), 0));
+                            for (int i = (int) listado.getDuracion(); i > listado.getDuracion() - 10; i--) {
+                                try {
 //                                pruebas.setText(listado.getDuracion() + " Ejecutando2........ " + i);
-                                color.setBackground(Color.GREEN);
-                                as.setText(listado.getNombre());
-                                System.out.println(posiproceso + " prestar atecion aquiiiiiiiiiiiiiiiiiiiiiii");
-                                mitablita.setValueAt(i, posiproceso, 4);
-                                mitablita.setValueAt("Ejecutando.... ", posiproceso, 5);
-                                histo += "Ejecutando  " + listado.getNombre() + " - " + listado.getTamanio() + "-" + listado.getTiempo_llegada() + "-" + listado.getDuracion() + "\n";
-                                txttemp.setText(histo);
-                                Thread.sleep(100);
-                            } catch (InterruptedException ex) {
-                                Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);
+                                    color.setBackground(Color.RED);
+                                    as.setText(listado.getNombre());
+                                    mitablita.setValueAt(i, posiproceso, 4);
+                                    mitablita.setValueAt("Ejecutando.... ", posiproceso, 5);
+
+                                    Thread.sleep(t);
+                                } catch (InterruptedException ex) {
+                                    Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);
+                                }
                             }
+                            double duracio = (listado.getDuracion() - 10);
+                            color.setBackground(Color.YELLOW);
+                            as.setText(listado.getNombre());
+                            histo += "Estado: Listo  " + "Proceso: " + listado.getNombre() + "\n";
+                            txttemp.setText(histo);
+                            mitablita.setValueAt("Listo ", posiproceso, 5);
+                            listado.setDuracion(duracio);
+                            Thread.sleep(400);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);
                         }
-                        double duracio = (listado.getDuracion() - 10);
-                        System.out.println("estrando al 2do");
-//                        pruebas.setText("Listo........ ");
-                        color.setBackground(Color.YELLOW);
-                        as.setText(listado.getNombre());
-                        histo+="Listo  "+listado.getNombre()+" - "+ listado.getTamanio()+"-"+listado.getTiempo_llegada()+"-"+ listado.getDuracion()+"\n";
-                        txttemp.setText(histo);
-                        mitablita.setValueAt("Listo ... ", posiproceso, 5);
-                        listado.setDuracion(duracio);
                     }
                 }
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(t);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -313,11 +407,21 @@ public class principal extends javax.swing.JFrame implements Runnable {
             boolean[] x = {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false};
             procesosTabla = x;
             jLabel5.setText("");
+            color.setOpaque(false);
+            contadorNombre = 0;
 
         }
     }
 
     public void datotabla(int posicion, String nombre, int tamaño, int tiempolle, int duracion, String estado) {
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.CENTER);
+        mitablita.getColumnModel().getColumn(0).setCellRenderer(tcr);
+        mitablita.getColumnModel().getColumn(1).setCellRenderer(tcr);
+        mitablita.getColumnModel().getColumn(2).setCellRenderer(tcr);
+        mitablita.getColumnModel().getColumn(3).setCellRenderer(tcr);
+        mitablita.getColumnModel().getColumn(4).setCellRenderer(tcr);
+        mitablita.getColumnModel().getColumn(5).setCellRenderer(tcr);
         DefaultTableModel modelo = (DefaultTableModel) mitablita.getModel();
         Object[] fila = new Object[6];
         fila[0] = posicion;
@@ -333,9 +437,8 @@ public class principal extends javax.swing.JFrame implements Runnable {
 
     // metodos de la lista
     public void insertar(String nombre, int tamanio, int tiempo_llegada, int duracion) {
-//        int posi,String nombre,int tamanio, double tiempo_llegada,double duracion
         lista.add(new Nodo(tamaño_lista, nombre, tamanio, tiempo_llegada, duracion));
-        datotabla(tamaño_lista, nombre, tamanio, tiempo_llegada, duracion, "Listo");
+        datotabla(tamaño_lista, nombre, tamanio, tiempo_llegada, duracion, "Nuevo");
         tamaño_lista++;
     }
 
@@ -376,12 +479,12 @@ public class principal extends javax.swing.JFrame implements Runnable {
     String histo = "";
     boolean estadobont = true;
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
+
         agregar.setEnabled(false);
         correr.setEnabled(false);
         Random rand = new Random();
         tiempo_llegada = Integer.parseInt(segundos);
         int randInt = rand.nextInt(63); //Genera numeros de 0 a 65535 que es nuestro espacio disponible
-//        bloques.setText("");
         Procesos procesoAux = new Procesos("aux", 0, 0, 0, 0);//ignorarlo solo lo uso para usar una funcion
         int guiaParaAsignarEspacios = procesoAux.saberBloquesAUtilizar(randInt);//me indica cuantos bloques de memoria debo buscar
         bloque = guiaParaAsignarEspacios;
@@ -415,15 +518,12 @@ public class principal extends javax.swing.JFrame implements Runnable {
         if (PosB != 0) {//significa que encontro posiciones libres
             Procesos process = new Procesos("P" + this.contadorNombre, randInt, PosA, PosB, 10);
             this.contadorNombre++;
-//            System.out.println("tam "+ randInt+ " nombre " + process.getNombre()+" tiempollegada "+tiempo_llegada+" duracion "+ duracion2);
-            //Se agreaga a la lista circular
             int duracion_limite = (int) (Math.random() * (16 - 5)) + 5;
             insertar(process.getNombre(), process.getBloques(), tiempo_llegada, duracion_limite);
-            histo += "Creando  " + process.getNombre() + "--" + process.getBloques() + "--" + tiempo_llegada + "--" + duracion_limite + "\n";
+            histo += "Estado: Nuevo  " + "Proceso: " + process.getNombre() + "\n";
             txttemp.setText(histo);
             System.out.println("agregando datos ......................");
             jLabel5.setText(String.valueOf(randInt));
-//            bloques.setText(String.valueOf(process.getBloques()));
             Procesos.add(process);//voy añadiendo los procesos conforme le van dando click
             insertar++;
             contadorDeListaProcesos++;//aqui podriamos cambiar y mandarle otro numero
@@ -433,13 +533,10 @@ public class principal extends javax.swing.JFrame implements Runnable {
             System.out.println("posF" + posF);
 
         } else {
-            JOptionPane.showMessageDialog(null, "Memoria llena, el proceso ocupaba " + guiaParaAsignarEspacios);
+            JOptionPane.showMessageDialog(null, "Memoria llena");
             correr.setEnabled(true);
             agregar.setEnabled(true);
         }
-        //agregar.setEnabled(false);
-//        DireccionI hilo = new DireccionI();
-//        hilo.start();
 
     }//GEN-LAST:event_agregarActionPerformed
     public void Revibir() {
@@ -447,6 +544,7 @@ public class principal extends javax.swing.JFrame implements Runnable {
     }
     private void correrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_correrActionPerformed
         agregar.setEnabled(false);
+        color.setOpaque(true);
         mihilo hilo = new mihilo();
         hilo.start();
 
@@ -458,6 +556,8 @@ public class principal extends javax.swing.JFrame implements Runnable {
         while (ct == h1) {
             calcula();
             lblReloj.setText(hora + ":" + minutos + ":" + segundos + " " + ampm);
+            System.out.println("inicamos hora");
+            //
             try {
                 Thread.sleep(1000);
 
@@ -485,9 +585,7 @@ public class principal extends javax.swing.JFrame implements Runnable {
     }
 
     public void settamanioBloques(int cantbloque) {
-        /* if (cantbloque == 0) {
-            JOptionPane.showMessageDialog(null, "No tiene tamaño");
-        } else*/ if (cantbloque > 16) {
+        if (cantbloque > 16) {
             JOptionPane.showMessageDialog(null, "Supera nuestra capaci dad para almacenar");
         } else {
             this.tamañobloque = (int) Math.pow(2, cantbloque) - 1;
@@ -526,6 +624,9 @@ public class principal extends javax.swing.JFrame implements Runnable {
         @Override
         public void run() {//aqui dibujaremos
             while (true) {
+                DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+                tcr.setHorizontalAlignment(SwingConstants.CENTER);
+
                 System.out.println("toca insertar?" + insertar);
                 System.out.println(Procesos.size());
                 if (insertar == 1) {//hay procesos que meter en nuestro sistema
@@ -533,8 +634,6 @@ public class principal extends javax.swing.JFrame implements Runnable {
                     int Direccion;
                     String instruccion;
                     String[] datos = new String[4];
-                    //int bloque = Procesos.get(contadorDeListaProcesos).getBloques();
-                    //System.out.println("bloque" + bloque);
                     int bloqueAnterior = tablita.getRowCount();
                     if (Procesos.get(contadorDeListaProcesos).getBloques() != 0) {
                         System.out.println("Dibujar");
@@ -547,13 +646,12 @@ public class principal extends javax.swing.JFrame implements Runnable {
                                 settamanioBloques(bloqueAnterior + 1);
                                 tamaño = Hexadecimales(tamañobloque);
                                 instruccion = ObtenerInstruccion(posF);
-//                                Direccion= setDireccion(posI);
+
                             } else {
                                 System.out.println("también");
                                 settamanioBloques(bloque);
                                 tamaño = Hexadecimales(tamañobloque);
                                 instruccion = ObtenerInstruccion(posF);
-//                                Direccion= setDireccion(posI);
                             }
                             datos[0] = String.valueOf(posF);
                             datos[1] = tamaño;
@@ -565,7 +663,6 @@ public class principal extends javax.swing.JFrame implements Runnable {
                                 settamanioBloques(1 + bloqueAnterior);// bloque disponible
                                 tamaño = Hexadecimales(tamañobloque);
                                 instruccion = ObtenerInstruccion(posI);
-//                                Direccion= setDireccion(posI);
                                 System.out.println("bloqueAnterior----" + bloqueAnterior);
                                 System.out.println("TAMAÑO" + tamañobloque);
                                 System.out.println("tamañoooo" + tamaño);
@@ -575,7 +672,6 @@ public class principal extends javax.swing.JFrame implements Runnable {
                                 settamanioBloques(0);
                                 tamaño = Hexadecimales(tamañobloque);
                                 instruccion = ObtenerInstruccion(posI);
-//                                Direccion= setDireccion(posI);
                                 System.out.println("tamaño" + tamañobloque);
                                 System.out.println("NO HAY ");
                             }
@@ -585,27 +681,9 @@ public class principal extends javax.swing.JFrame implements Runnable {
                         } else if (Procesos.get(contadorDeListaProcesos).getBloques() <= bloque) {
 
                         }
-                        //System.out.println(Procesos.get(0).getBloques());
-                        //1 ultimo bloque 
-                        //getBloque total de bloques 
-                        //posB pos final 1-6
-                        //posA inicial 
-                        //4 datos posibles necesitamos
-                        //datos[0] = " ";
-//                        datos[0] = " ";
+
                         datos[3] = " ";
 
-                        /*int suma= Procesos.get(contadorDeListaProcesos).getBloques() + bloqueAnterior;
-                        if (Procesos.get(contadorDeListaProcesos).getBloques() + bloqueAnterior == posF + 1) {
-                            datos[0] = "fin";
-                            System.out.println("bloque Ant"+bloqueAnterior);
-                            System.out.println("Aqui"+Procesos.get(contadorDeListaProcesos).getBloques());
-                            System.out.println("suma "+ suma);
-                        }
-                        if (Procesos.get(contadorDeListaProcesos).getBloques() + bloqueAnterior == posI + 1) {
-                            datos[0] = "inicio";
-                            
-                        }*/
                         tables.addRow(datos);
                         Procesos.get(contadorDeListaProcesos).setBloques(Procesos.get(contadorDeListaProcesos).getBloques() - 1);
                     } else {
@@ -615,11 +693,15 @@ public class principal extends javax.swing.JFrame implements Runnable {
                         correr.setEnabled(true);
 
                     }
-                    tablita.setModel(tables);
 
+                    tablita.setModel(tables);
+                    //centramos datos de una tabla
+                    tablita.getColumnModel().getColumn(0).setCellRenderer(tcr);
+                    tablita.getColumnModel().getColumn(1).setCellRenderer(tcr);
+                    tablita.getColumnModel().getColumn(2).setCellRenderer(tcr);
                 }
                 try {
-                    Thread.sleep(1000);//revisaremos a cada cierto tiempo
+                    Thread.sleep(t);//revisaremos a cada cierto tiempo
                 } catch (InterruptedException ex) {
                     System.out.println("Error en el hilo de dibujo");
                 }
@@ -628,26 +710,8 @@ public class principal extends javax.swing.JFrame implements Runnable {
         }
 
     }
-//    public class DireccionI extends Thread {
-//        int contador = 0;
-//        
-//        @Override
-//        public void run(){
-//            //si la memoria es de 16 bits
-//            while(contador<16){
-//                contador++;
-////                Dir.setText(String.valueOf(contador));
-//                System.out.println("Conador de Direccion: "+contador);
-//                try {
-//                   Thread.sleep(1000);
-//            } catch (InterruptedException ex) {
-//                Logger.getLogger(ObtenerDireccion.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//            }
-//        }
-//    }
-    //pasar la direccion a Hexadecimal
 
+    //pasar la direccion a Hexadecimal
     public String DireccionHexadecimal(int decimal) {
         Scanner teclado = new Scanner(System.in);
         teclado.close();
@@ -698,13 +762,20 @@ public class principal extends javax.swing.JFrame implements Runnable {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel SO;
     private javax.swing.JButton agregar;
     private javax.swing.JLabel as;
+    private javax.swing.JLabel as1;
     private javax.swing.JPanel color;
     private javax.swing.JButton correr;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

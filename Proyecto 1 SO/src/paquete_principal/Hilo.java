@@ -67,7 +67,7 @@ public class Hilo extends Thread {
     public void run() {
         while (activo == true) {
             tiempo = tiem.nextInt(100);
-            c=1;
+            c = 1;
             if (c == 1) {
                 System.out.println(nombre);
                 c = 2;
@@ -75,7 +75,6 @@ public class Hilo extends Thread {
             if (c == 2) {
                 System.out.println(accion);
                 //Debe esperar hasta que el proceso anterior haya finalizado
-                
 
                 c = 3;
             }
