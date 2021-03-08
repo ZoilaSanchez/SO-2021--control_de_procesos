@@ -178,7 +178,7 @@ public class principal extends javax.swing.JFrame implements Runnable {
         jLabel1.setForeground(new java.awt.Color(255, 255, 102));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("CONTROL DE PROCESOS --- ALGORITMO RR");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 890, 45));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 930, 45));
 
         agregar.setBackground(new java.awt.Color(102, 102, 102));
         agregar.setFont(new java.awt.Font("DialogInput", 1, 18)); // NOI18N
@@ -191,7 +191,7 @@ public class principal extends javax.swing.JFrame implements Runnable {
                 agregarActionPerformed(evt);
             }
         });
-        getContentPane().add(agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 380, 170, 90));
+        getContentPane().add(agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 380, 170, 90));
 
         jLabel4.setFont(new java.awt.Font("DialogInput", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(204, 255, 255));
@@ -206,7 +206,7 @@ public class principal extends javax.swing.JFrame implements Runnable {
         lblReloj.setFont(new java.awt.Font("DialogInput", 1, 18)); // NOI18N
         lblReloj.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblReloj.setText("HORA");
-        getContentPane().add(lblReloj, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 350, 250, -1));
+        getContentPane().add(lblReloj, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 350, 250, -1));
 
         correr.setBackground(new java.awt.Color(0, 0, 0));
         correr.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
@@ -219,7 +219,7 @@ public class principal extends javax.swing.JFrame implements Runnable {
                 correrActionPerformed(evt);
             }
         });
-        getContentPane().add(correr, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 490, 170, 90));
+        getContentPane().add(correr, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 500, 170, 90));
 
         mitablita.setBackground(new java.awt.Color(0, 0, 0));
         mitablita.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
@@ -234,7 +234,7 @@ public class principal extends javax.swing.JFrame implements Runnable {
         ));
         jScrollPane2.setViewportView(mitablita);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 830, 170));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 830, 170));
 
         as.setFont(new java.awt.Font("DialogInput", 1, 36)); // NOI18N
         as.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -265,7 +265,7 @@ public class principal extends javax.swing.JFrame implements Runnable {
         txttemp.setWrapStyleWord(true);
         jScrollPane3.setViewportView(txttemp);
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 270, 290, 340));
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 270, 390, 340));
 
         jLabel3.setFont(new java.awt.Font("DialogInput", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(204, 255, 255));
@@ -276,22 +276,22 @@ public class principal extends javax.swing.JFrame implements Runnable {
         jLabel6.setForeground(new java.awt.Color(204, 255, 255));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("HISTORIAL");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 230, 240, 45));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 230, 360, 45));
 
         jLabel7.setFont(new java.awt.Font("DialogInput", 1, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(204, 255, 255));
         jLabel7.setText("Direccion de memoria");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 260, 240, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 260, 240, -1));
 
         jLabel8.setFont(new java.awt.Font("DialogInput", 1, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(204, 255, 255));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("Hora del sistema");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 320, 260, 45));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 320, 260, 45));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/low-poly-blue_a2ZpZmuUmZqaraWkpJRnamtlrWZrZWU.png"))); // NOI18N
         jLabel2.setText("jLabel2");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 890, 650));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 930, 650));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -314,7 +314,7 @@ public class principal extends javax.swing.JFrame implements Runnable {
                     Nodo listado = itrNodo.next();
                     System.out.println("posciones de tabla " + posiciontabla);
                     if (listado.getDuracion() <= 10) {
-                        histo += "Estado: Ejecutandose  " + "Proceso: " + listado.getNombre() + "\n";
+                        histo += "Estado: Ejecutandose  " + "Proceso: " + listado.getNombre()+ " Hora: "+lblReloj.getText()  + "\n";
                         txttemp.setText(histo);
                         int posiproceso = (int) (mitablita.getValueAt(listado.getPosi(), 0));
                         System.out.println("proce eliminado : " + listado.getNombre() + " cantidad " + listado.getDuracion());
@@ -322,7 +322,7 @@ public class principal extends javax.swing.JFrame implements Runnable {
                             if (i == 0) {
                                 try {
                                     mitablita.setValueAt("Termindo", posiproceso, 5);
-                                    histo += "Estado: Saliente  " + "Proceso: " + listado.getNombre() + "\n";
+                                    histo += "Estado: Saliente  " + "Proceso: " + listado.getNombre()  + " Hora: "+lblReloj.getText()  + "\n";
                                     txttemp.setText(histo);
                                     color.setBackground(Color.GREEN);
                                     as.setText(listado.getNombre());
@@ -353,7 +353,7 @@ public class principal extends javax.swing.JFrame implements Runnable {
                     } else if (listado.getDuracion() > 10) {
                         try {
                             System.out.println(listado.getDuracion() + "atencion ---------------------------------------------");
-                            histo += "Estado: Ejecutandose  " + "Proceso: " + listado.getNombre() + "\n";
+                            histo += "Estado: Ejecutandose  " + "Proceso: " + listado.getNombre() + " Hora: "+lblReloj.getText()  +  "\n";
                             txttemp.setText(histo);
                             int posiproceso = (int) (mitablita.getValueAt(listado.getPosi(), 0));
                             for (int i = (int) listado.getDuracion(); i > listado.getDuracion() - 10; i--) {
@@ -372,7 +372,7 @@ public class principal extends javax.swing.JFrame implements Runnable {
                             double duracio = (listado.getDuracion() - 10);
                             color.setBackground(Color.YELLOW);
                             as.setText(listado.getNombre());
-                            histo += "Estado: Listo  " + "Proceso: " + listado.getNombre() + "\n";
+                            histo += "Estado: Listo  " + "Proceso: " + listado.getNombre()  + " Hora: "+lblReloj.getText()  + "\n";
                             txttemp.setText(histo);
                             mitablita.setValueAt("Listo ", posiproceso, 5);
                             listado.setDuracion(duracio);
@@ -517,7 +517,7 @@ public class principal extends javax.swing.JFrame implements Runnable {
             this.contadorNombre++;
             int duracion_limite = (int) (Math.random() * (16 - 5)) + 5;
             insertar(process.getNombre(), process.getBloques(), tiempo_llegada, duracion_limite);
-            histo += "Estado: Nuevo  " + "Proceso: " + process.getNombre() + "\n";
+            histo += "Estado: Nuevo  " + "Proceso: " + process.getNombre() + " Hora: "+lblReloj.getText() + "\n";
             txttemp.setText(histo);
             System.out.println("agregando datos ......................");
             jLabel5.setText(String.valueOf(randInt));
