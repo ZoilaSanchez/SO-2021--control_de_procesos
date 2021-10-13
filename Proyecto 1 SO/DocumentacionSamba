@@ -1,0 +1,42 @@
+Servicio de SAMBA
+
+En el proyecto se solicita el servicio cfis/smb
+del cual se investigo que la mejor opción es samba, pues este permite compartir documentos desde windows y unix de forma eficiente. 
+
+
+
+Para la aplicación de este se llevaron los siguientes pasos:
+
+1- instalar samba
+	sudo apt install samba
+   de este comando pueden surgir ciertos errores, los cuales se solucionan depende lo que ocurrió. Uno de los errores se soluciona con el comando  apt-get update .
+En otro error se debe eliminar una carpeta 
+/var/lib/dpkg/lock esto se realiza con el comando sudo rm /var/lib/dpkg/lock.
+A raíz de este error surge la necesidad de borrar /var/cache/apt/archives/lock - open.
+De no ser alguno de estos errores ubuntu indica que solución implementar.
+Una de las aplicadas fue la descarga del archivo que indico como faltante ubuntu. 
+Al finalizar cada cambio debe utilizar el comando sudo apt updte
+y de nuevo usar el comando sudo apt install samba
+
+2- Como segundo paso 
+Utilizar el comando ifconfig para saber la ip del dispositivo con el que se esta trabajando. 
+De no tenerlo disponible instalarlo con el comando 
+ sudo apt -y install net-tools
+
+Ahora ya es posible utilizar el comando ifconfig.
+
+Obtener la ip, en el caso del dispositivo que tiene el servicio de samba, es 192.168.1.107.
+
+Como ultimo paso, ir a escritorio y crear una carpeta , en este caso se le llamó "samba".
+En el área de recurso compartido se debe activar la casilla de "Compartir esta carpeta", "Permitir a otras personas crear y eliminar archivos en esta carpeta " y "Acceso invitado(para personas sin una cuenta de usuario)"
+
+
+Para la comprobación de que este servicio esta disponible en todas las computadoras. Se tiene que tener en una misma red los dispositivos con los que se desea aplicar. 
+
+Dirijase a la màquina que desee ( una que este dentro de la red) . Entre en  el espacio de "Files" y presione la tecla ctrl+l
+en el espacio superior que se le habilita 
+ingrese smb:// 192.168.1.107
+La ip depende de la respuesta que obtuvo en el dispositivo anteriormente trabajado. 
+
+
+Encargada : Andrea Guadalupe Morales Huitz 1507-18
